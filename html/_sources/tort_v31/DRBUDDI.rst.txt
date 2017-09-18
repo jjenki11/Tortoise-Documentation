@@ -1,0 +1,72 @@
+
+.. DRBUDDI:
+
+
+
+**STEP 3.1:DR-BUDDI**
+=====================
+
+.. image:: C:\Users\Ami\Desktop\DRBUDDI.png
+   :align: left
+   :width: 150px
+
+If you have acquired data with opposite phase encoding direction, please skip the EPI correction in DIFFPREP and do the DRBUDDI correction as described below. 
+
+DR-BUDDI performs EPI distortion correction using two datasets with opposite phase encoding directions.
+
+.. image:: C:\Users\Ami\Desktop\DRBUDDI_processing_main_folder.png
+
+ Please note that the datasets need to have gone through the DIFFPREP processing.
+An example scenario:
+If you have a test dataset with Subject1_DTI_UP (blip up) and Subject1_DTI_down (blip down), both will have to go through DIFFPREP processing separately to generate **Subject1_DTI_up_proc.list** and **Subject1_DTI_up_proc.list** that are generated within each of the up and down proc folders. These are the inputs to DR-BUDDI together with the structural image (for best results, it is best to use a T2 W fat suppressed dataset).
+
+
+.. Note:: Two additional parameters have been introduced in DRBUDDI3.1 which were not present in the 3.0 version. They are the gradient non linearity correction. If you intend to use these correction measures, you will have to use 3.1 for all import and DIFFPREP processing as well.
+
+
+The screenshot below shows the DRBUDDI help file for version 3.1
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DRBUDDI_usage.png
+
+
+The following screenshot will show the outputs from DRBUDDI processing. The folder structure will be as follows:
+
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DRBUDDI_output\DRBUDDI_processing_main_folder.png
+
+
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: 20 80
+   :stub-columns: 0
+
+   * - Folders
+     - Description
+   * - **DTI_down**
+     - folder containing the raw down data pre-import     
+   * - **DTI_up**
+     - folder containing the raw up data pre-import
+   * - **subject1_DTI_up_proc**
+     - folder generated post import, renamed to add a prefix 'subject1_DTI'. It contains        all the files decribed in the DIFFPREP             outputs sections. In addition,        after running DRBUDDI, there will be files ending          in _'DRBUDDI'. These        are the 'DRBUDDI corrected UP' files. This is not the final            DRBUDDI        output but only the output before combining with the down data.      
+   * - **subject1_DTI_down.proc**
+     - The same decription as for the subject1_DTI_up_proc, except the file names here           will be subject1_DTI_down.       
+   * - **subject1_DTI_up_proc_DRBUDDI_proc**
+     - This is the final DRBUDDI folder that contains all the files that will be decribed        in the 'outputs of DRUDDI' section. 
+   
+   * - **T2_acpc.nii**
+     - The subject specific T2 file that will be used in the DRBUDDI processing. Please        note, this file can exist anywhere but has been included here, in the main        folder, to be organised. 
+
+
+
+DRBUDDI outputs
+-------------------
+
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DRBUDDI_processing_outputs.png
+
+
+
+
+.. Note:: In TORTOISE 3.1 version the final DRBUDDI outputs in DRBUDDI_proc folder will be in the final space of the structural provided during processing i.e *_finalDRBUDDI* will be in the space of *structural.nii*. The intermediate files such as up and down quad, up and down corrected and final b0 will all be in the space of *structrual_used.nii*. This structrual used in fact is in the space of the up_b0.nii space. So, when you visualize these intermediate files, you may find that they may not be in the standard orientation that you would expect the final images to be in. Only the final images will in the final orientation.
+

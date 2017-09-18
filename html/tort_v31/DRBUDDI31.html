@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>10. STEP 3.1 (after DIFFPREP):DR-BUDDI &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. STEP 4:QUALITY ASSESSMENT" href="quality31.html" />
+    <link rel="prev" title="9. Outputs of DIFFPREP" href="DIFFPREPoutputs31.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="quality31.html" title="11. STEP 4:QUALITY ASSESSMENT"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="DIFFPREPoutputs31.html" title="9. Outputs of DIFFPREP"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.1 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="step-3-1-after-diffprep-dr-buddi">
+<h1>10. <strong>STEP 3.1 (after DIFFPREP):DR-BUDDI</strong><a class="headerlink" href="#step-3-1-after-diffprep-dr-buddi" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/DRBUDDI.png"><img alt="../_images/DRBUDDI.png" class="align-left" src="../_images/DRBUDDI.png" style="width: 150px;" /></a>
+<p>If you have acquired data with opposite phase encoding direction, please skip the EPI correction in DIFFPREP and do the DRBUDDI correction as described below.</p>
+<p>DR-BUDDI performs EPI distortion correction using two datasets with opposite phase encoding directions.</p>
+<p>An example scenario:
+If you have a test dataset with Subject1_DTI_UP (blip up) and Subject1_DTI_down (blip down), both will have to go through DIFFPREP processing separately to generate <strong>Subject1_DTI_up_proc.list</strong> and <strong>Subject1_DTI_up_proc.list</strong> that are generated within each of the up and down proc folders. These are the inputs to DR-BUDDI together with the structural image (for best results, it is best to use a T2 W fat suppressed dataset).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Two additional parameters have been introduced in DRBUDDI3.1 which were not present in the 3.0 version. They are the gradient non linearity correction. If you intend to use these correction measures, you will have to use 3.1 for all import and DIFFPREP processing as well.</p>
+</div>
+<p>The screenshot below shows the DRBUDDI help file for version 3.1</p>
+<img alt="../_images/DRBUDDI_usage.png" src="../_images/DRBUDDI_usage.png" />
+<p>The following screenshot will show the outputs from DRBUDDI processing. The folder structure will be as follows:</p>
+<img alt="../_images/DRBUDDI_processing_main_folder.png" src="../_images/DRBUDDI_processing_main_folder.png" />
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Folders</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>DTI_down</strong></td>
+<td>folder containing the raw down data pre-import</td>
+</tr>
+<tr class="row-odd"><td><strong>DTI_up</strong></td>
+<td>folder containing the raw up data pre-import</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_proc</strong></td>
+<td>folder generated post import, renamed to add a prefix ‘subject1_DTI’. It contains all the files decribed in the DIFFPREP             outputs sections. In addition, after running DRBUDDI, there will be files ending          in _’DRBUDDI’. These        are the ‘DRBUDDI corrected UP’ files. This is not the final DRBUDDI output but only the output before combining with the down data.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_down.proc</strong></td>
+<td>The same decription as for the subject1_DTI_up_proc, except the file names here will be subject1_DTI_down.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_proc_DRBUDDI_proc</strong></td>
+<td>This is the final DRBUDDI folder that contains all the files that will be decribed in the ‘outputs of DRUDDI’ section.</td>
+</tr>
+<tr class="row-odd"><td><strong>T2_acpc.nii</strong></td>
+<td>The subject specific T2 file that will be used in the DRBUDDI processing. Please note, this file can exist anywhere but has been included here, in the main folder, to be organised.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="drbuddi-outputs">
+<h2>10.1. DRBUDDI outputs<a class="headerlink" href="#drbuddi-outputs" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/DRBUDDI_processing_outputs.png" src="../_images/DRBUDDI_processing_outputs.png" />
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Outputs of DIFFPREP processing</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>command.log</strong></td>
+<td>test file that describes the command used in DRBUDDI processing</td>
+</tr>
+<tr class="row-odd"><td><strong>blip_up_b0.nii</strong></td>
+<td>Uncorrected b0 from ‘up’ data</td>
+</tr>
+<tr class="row-even"><td><strong>blip_down_b0.nii</strong></td>
+<td>Uncorrected b0 from ‘down’ data</td>
+</tr>
+<tr class="row-odd"><td><strong>blip_up_dwi_*</strong></td>
+<td>synthesized DWIs generated from the ‘up’ data. Default will be four nii files will be generated from dwi_0 to dwi_4 as          the disortion level set is ‘medium’. For disortion setting ‘large’,six nii files will be generated from dwi_0 to dwi_5          will be generated.</td>
+</tr>
+<tr class="row-even"><td><strong>blip_down_dwi_*</strong></td>
+<td>synthesized DWIs generated from the ‘down’ data. Default will be four nii files will be generated from dwi_0 to dwi_4 as        the disortion level set is ‘medium’. For disortion setting ‘large’,six nii files will be generated from dwi_0 to dwi_5          will be generated.</td>
+</tr>
+<tr class="row-odd"><td><strong>blip_up_quad</strong></td>
+<td>uncorrected ‘up’ b0 that now is at the resolution of the structural_used.nii</td>
+</tr>
+<tr class="row-even"><td><strong>blip_down_quad</strong></td>
+<td>uncorrected ‘down’, b0 that now is rigidly registered to the structural_used.nii</td>
+</tr>
+<tr class="row-odd"><td><strong>blip_up_b0_quad.hdf5</strong></td>
+<td>transformation binary text file</td>
+</tr>
+<tr class="row-even"><td><strong>blip_up_b0_quad.hdf5</strong></td>
+<td>transformation binary text file</td>
+</tr>
+<tr class="row-odd"><td><strong>deformation_FINV.nii.gz and deformation_MINV.niig.gz</strong></td>
+<td>deformation fields generated after b0’s are registered to structrual</td>
+</tr>
+<tr class="row-even"><td><strong>structural.nii</strong></td>
+<td>original structural file input when running DRBUDDI. The final DRBUDDI outputs will be in the space of the input               structural file.</td>
+</tr>
+<tr class="row-odd"><td><strong>structural_used.nii</strong></td>
+<td>The structural.nii is now in the space of the ‘up’ b0.nii. Please see the <strong>note</strong> below for additional details</td>
+</tr>
+<tr class="row-even"><td><strong>blip_up_b0_corrected.nii</strong></td>
+<td>‘up’ b0 now is corrected for distortions using information from the structural_used.nii</td>
+</tr>
+<tr class="row-odd"><td><strong>blip_down_b0_corrected.nii</strong></td>
+<td>‘down’ b0 now is corrected for distortions using information from the structural_used.nii</td>
+</tr>
+<tr class="row-even"><td><strong>b0_corrected_final.nii</strong></td>
+<td>the geometric mean of the ‘blip_up_b0_corrected.nii’ and ‘blip_down_b0_corrected.nii’.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up_proc_DRBUDDI_final.bmtxt</strong></td>
+<td>the final bmtxt of the corrected data in the space of the structural.nii i.e the space of the strutural file that you        gave as input when running DRBUDDI.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_proc_DRBUDDI_final.list</strong></td>
+<td>the final list file that points to the final bmtxt and final nii file. You will need to use</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up_proc_DRBUDDI_final.nii</strong></td>
+<td>the final combined up and down diffusion data in nii format</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In TORTOISE 3.1 version the final DRBUDDI outputs in DRBUDDI_proc folder will be in the final space of the structural provided during processing i.e <strong>_finalDRBUDDI</strong> will be in the space of <strong>structural.nii</strong>. The intermediate files such as up and down quad, up and down corrected and final b0 will all be in the space of <em>structural_used.nii</em>. The <strong>structural_used.nii</strong> in fact is in the space of the <strong>up_b0.nii</strong> space. So, when you visualize these intermediate files, you may find that they may not be in the standard orientation that you would expect the final images to be in. Only the final images will in the final orientation.</p>
+</div>
+</div>
+<div class="section" id="if-up-and-down-bmtxts-or-number-of-volumes-do-not-match">
+<h2>10.2. <strong>If UP and DOWN bmtxts or number of volumes do not match</strong><a class="headerlink" href="#if-up-and-down-bmtxts-or-number-of-volumes-do-not-match" title="Permalink to this headline">¶</a></h2>
+<p>If your data has up and down bmtxts that do not match, DRBUDDI3.1 will run but will output an warning message in the terminal indicating that the up and down data will not be combined. If the number of volumes and bmtxts do not match, DRBUDDI will now automatically output the geometrically corrected and signal manipulated versions of both up and down data.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">10. <strong>STEP 3.1 (after DIFFPREP):DR-BUDDI</strong></a><ul>
+<li><a class="reference internal" href="#drbuddi-outputs">10.1. DRBUDDI outputs</a></li>
+<li><a class="reference internal" href="#if-up-and-down-bmtxts-or-number-of-volumes-do-not-match">10.2. <strong>If UP and DOWN bmtxts or number of volumes do not match</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="DIFFPREPoutputs31.html"
+                        title="previous chapter">9. <strong>Outputs of DIFFPREP</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quality31.html"
+                        title="next chapter">11. <strong>STEP 4:QUALITY ASSESSMENT</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/DRBUDDI31.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="quality31.html" title="11. STEP 4:QUALITY ASSESSMENT"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="DIFFPREPoutputs31.html" title="9. Outputs of DIFFPREP"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.1 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

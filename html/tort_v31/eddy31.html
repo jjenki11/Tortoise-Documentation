@@ -1,0 +1,176 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7. STEP 3: EDDY MOTION AND EPI DISTORTION CORRECTION &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. DIFFPREP INPUT AND OUTPUT QUALITY CHECK" href="afni_qc.html" />
+    <link rel="prev" title="6. STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE" href="anatomicals31.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="afni_qc.html" title="8. DIFFPREP INPUT AND OUTPUT QUALITY CHECK"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="anatomicals31.html" title="6. STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.1</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="step-3-eddy-motion-and-epi-distortion-correction">
+<h1>7. <strong>STEP 3: EDDY MOTION AND EPI DISTORTION CORRECTION</strong><a class="headerlink" href="#step-3-eddy-motion-and-epi-distortion-correction" title="Permalink to this headline">¶</a></h1>
+<p>Please note: It is strongly recommended to check your data for artifacts especially if it affects the first b0 image. Since in DIFFPREP processing, the corrections are performed using b0 as the template, it is important that this volume is artifact free. The software by default uses the first b0 but you have an option to specify the b0 volume you would like to use as the template, if the first b0 has some artifacts such as slice dropout or signal inhomogeneity artifacts.
+If your first b0 has interleave slice motion artifact, please delete the volume before processing through DIFFPREP and the software will use the next b0 in the series.</p>
+<p>Syntax to run the DIFFPREP command and various tags are shown here. These options also come up when you type DIFFPREP in your terminal from inside the bin folder.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If TORTOISE is added to your path using the above instructions for the different OS listed, you can run the various executables listed in the upcmoming sections by just typing them in the terminal. If TORTOISE is not added to your path, then you will have to go to the folder where the executables exist and run with a <strong>./</strong> before running command of interest.</p>
+</div>
+<img alt="../_images/DIFFPREP_usage_2.png" src="../_images/DIFFPREP_usage_2.png" />
+<img alt="../_images/DIFFPREP_usage_2_2.png" src="../_images/DIFFPREP_usage_2_2.png" />
+<img alt="../_images/qc_screenshot.png" src="../_images/qc_screenshot.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have AFNI installed on your computer, the now when running DIFFPREP, it will output a folder by name QC in your _proc folder. Please refer to the <strong>section 11 DIFFPREP input and output quality check</strong> for more information on the outputs generated in the QC folder. You can turn off this feature by using the tag <strong>- -do_qc 0</strong> and the QC folder will not be generated.</p>
+</div>
+<p>Registration settings file will be provided in the TORTOISE folder under the name ‘example registration settings.dmc’ which is set with default settings or to which you can add other options that would be consistently used across all subjects. If you would like to overwrite the registration settings, then the options given in the command line takes higher priority over what is in the settings file. A log of the command run will be saved in the log folder for future reference. This is further explained in the ‘outputs of DIFFPREP section’.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple">
+<li>Please create a <strong>DIFF_PREP_WORK</strong> folder in your home directory and copy the example registration settings.dmc file in to the folder. The software expects the settings file to be in the DIFF_PREP_WORK folder.</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple" start="2">
+<li>If you are processing human data, you are not required to provide a registration settings file and the software will process the data with preset options. The options used in processing such datasets, will be written in the <strong>proc</strong> <strong>folder as</strong> <strong>.dmc</strong>. <strong>The output resolution will be in the native resolution of the image.</strong></li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple" start="3">
+<li>You may modify the registration settings file before processing to suit your study. The options are explained in the registration settings.dmc (can open with any text editor) and the same file can be used for the entire study.</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple" start="4">
+<li>You may use ‘will_be_drbuddied  1’ option to turn on this tag. This will run the only the motion and eddy distortion correction in DIFFPREP. You may then refer to section on DRBUDDI for further steps in generating EPI corrected data. Also refer the section on DIFFPREP outputs to see what outputs will be generated in the proc folder if the will_be_drbuddied option is turned on.</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple" start="5">
+<li>It is essential to look at your bmtxt files for both <strong>up</strong> and <strong>down</strong> data to make sure they match. For optimal use of DRBUDDI correction, the signs on all columns and rows in the up_bmtxt should match to the corresponding rows and columns in the down_bmtxt file. Please refer to DRBUDDI section for information on outputs if these two bmtxts do not match.</li>
+</ol>
+</div>
+<div class="section" id="registration-steps-during-diffprep">
+<h2>7.1. Registration steps during DIFFPREP<a class="headerlink" href="#registration-steps-during-diffprep" title="Permalink to this headline">¶</a></h2>
+<p>The screenshot will show you an example of the processing steps that occur when running DIFFPREP.</p>
+<p>The steps are as follows and depending on your registration settings. The example shown here is for a dataset run with the following settings: gibbs ringing correction-on, denoising-on, no EPI disortion correction.</p>
+<img alt="../_images/InkedDIFFPREP_processing_example2_LI.png.jpg" src="../_images/InkedDIFFPREP_processing_example2_LI.png.jpg" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice the congratulations message at the end of diffprep processing. This is good news as if things did not run correctly, error messages would be displayed in the terminal. It is adviced you note any error message displayed. Most of it will clearly indicate the issues and would be easy to troubleshoot by the user. Certain occcasions, few error messages are hard to troubleshoot and it would be helpful for TORTOISE tech support if a screenshot of the error is sent over together with the description of how the data was run using the diffprep command. It is best to also check the outputs generated, which are explained in the upcoming section.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7. <strong>STEP 3: EDDY MOTION AND EPI DISTORTION CORRECTION</strong></a><ul>
+<li><a class="reference internal" href="#registration-steps-during-diffprep">7.1. Registration steps during DIFFPREP</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="anatomicals31.html"
+                        title="previous chapter">6. <strong>STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="afni_qc.html"
+                        title="next chapter">8. <strong>DIFFPREP INPUT AND OUTPUT QUALITY CHECK</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/eddy31.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="afni_qc.html" title="8. DIFFPREP INPUT AND OUTPUT QUALITY CHECK"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="anatomicals31.html" title="6. STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.1</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+.. change_log:
+
+
+
+ 
+**CHANGE LOG FROM TORTOISE V3.0 TO TORTOISE V3.1**
+==================================================
+
+
+**Common Changes To All Modules**:
+
+* All TORTOISE modules, i.e. DIFFPREP, DRBUDDI, DIFFCALC and in the future DRTAMAS, now fully support the physical coordinate     systems as described by the NIFTI headers or DICOM tags. In all previous versions of TORTOISE, a given module used to     overwrite the header information, specifically, the direction matrices and the origin information, based on its     requirements. Therefore,  images output by TORTOISE did not align in MRI viewers that used physical coordinate systems.      Now they will.
+* All the import routines have been changed to conform to this change.
+* Support for sagittal and coronal acquisitions in addition to axial.
+* All modules have been made slightly faster.
+
+
+**DIFFPREP Changes (in addition to common changes)**
+--------------------------------------------------------
+
+* DIFFPREP can now automatically output quality control related images for the user to quickly review them. These     functionalities are based on AFNI modules are activated only if AFNI is installed. The user can enable and disable them     with the tag **- -do_QC**.
+* Instead of a listfile, bmatrix file and a NIFTI file trio, the user can now provide a NIFTI file, bvecs, bvals files and     the phase encoding direction as inputs to DIFFPREP. If this is the case, the listfile will automatically be created.
+* ImportDICOM_GE, ImportDICOM_Philips and ImportDICOM_Siemens executables from V.3.0.0 HAVE BEEN REMOVED. Instead, a new     import routine called ImportDICOM is included. This executable is based on dcm2niix , with the permission of Dr. Chris     Rorden.
+* ImportBruker executable now also outputs in physical coordinate system as defined by the method file. However, for some     animals, anatomical axial can be different than human axial, a new tag is introduced **- -convert_to_anatomical_header**. If     this tag is 0, the imported header will be identical to the acquisition. If the tag is set to **1**, coronal acquisitions will be assumed to be **anatomical axials** and the headers will be automatically rotated.
+* DIFFPREP now FULLY supports gradient non-linearity maps. These maps can be provided with the tag  **voxelwise_gradient_tensors** and they should  be a 4D NIFTI file with dimensions Nx x Ny x Nz x 9, where the last dimension     contains rowwise elements of a 3x3 diffusion gradient modifier matrix originating due to gradient nonlinearities.
+
+* The tag **voxelwise_gradient_space** defines in which space these gradient nonlinearity tensors are defined. Do they live in     the physical space of the b0 image, or do they live in the space of the structural image. Most of the time this should be     the b0 image but for example, the CONNECTOME data, it will the str8uctural space.
+
+* A new tag **- -will_be_drbuddied** is introduced.  If this tag is 1, after motion and eddy currents distortion correction     DIFFPREP will stop to save time and storage space.
+
+* A new tag **- -center_of_mass** is introduced. If the tag is set to **1** (which was always the case in previous versions),  the image’s     center of mass will be translated to the center pixel of the image for processing. If the tag is set to **0**, the image will be unaltered.     Default:1.  This is useful for example for non-brain data, where the acquired object is near the edge of the images instead     of the center.
+
+* Output listfile name can now be fully specified. Therefore, it can be placed in another folder and have a different name.
+
+* In DIFFPREP V3.0.0, Gibbs ringing correction was performed first, followed by denoising. In V3.1, processing starts with     denoising first, and depending on the settings performs Gibbs ringing correction on the proc.list data AND/OR     proc_denoised.list data.
+
+* The concept of **template image** is completely removed from DIFFPREP. Now there is only the structural and the b=0     image. Because of this change, the working field of view is not applied to the template image but the entire proc.list DWI     data by resampling it. This resampling **DOES** change the origin of the image but **DOES NOT** change the physical coordinate     system, i.e. all the images would overlay nicely in viewers that use physical coordinates.
+
+* ReorientImage executable has been changed to **FULL NIFTI** convention. The axes have been changed accordingly as well. It can also automatically convert a non-axial image to an axial one.
+
+* A new executable is introduced, **CreateVoxelwiseBmatricesFromDeformationField**.  This executable can be used to create     voxelwise Bmatrices due to deformation fields applied to the data, for example originating from a nonlinear registration or     atlas creation procedure.
+
+* Some optimization parameters in the **Assets/settings** folders have been further fine-tuned.
+
+**DRBUDDI Changes (in addition to common changes)**
+---------------------------------------------------
+
+* Some functionalities of DRBUDDI have been made significantly faster. Default disortion level setting which has been set to **medium** will ensure DRBUDDI running faster. The remaining disortion level settings when set, the corrections are performed on higher resolutions and the order is as follows:The first two resolutions are performed with a time varying velocity field based transformation and the highest resolution is then performed with SyN.
+* DRBUDDI now also supports QC outputs.
+* DRBUDDI now also supports gradient nonlinearity maps with the same tags as DIFFPREP. Please refer to DIFFPREP changes for       details.
+* To fully support gradient non-linearity maps, all diffeomorphic registration operations are now performed in the space of       the up b=0 image. In previous versions, these operations were performed in the space of the structural image. Due to this       change, the b0_quad.nii, b0_corrected.nii bo_final_corrected.nii and structural_used.nii images will be in the space of the up b0 images. However, at the last step, DRBUDDI will still reorient all the diffusion MRI data to the space of the             original structural image, or its resampled version, which is called structural.nii.
+* The Jacobian calculations for the CCJac and MSJac metrics have been completely changed and made more reliable and faster.       These two metrics are now significantly better than V3.0.0. However we still suggest to use a structural image and the CCSK     metric alongside one of these.
+* DRBUDDI now fully supports datasets with FULL up acquisitions, and a single b=0 acquisition for the down dataset.
+* IF the number of volumes and the Bmatrices match between the up and down data, DRBUDDI will still output the the combined       version. If they do not match, DRBUDDI will now automatically output the geometrically corrected and signal manipulated         versions of both data.
+* Following the previous item, in case the two datasets do not match, the signal modulation can be performed in two ways.         Jacobian or least squares based. This is controlled by the new tag **- -final_signal_modulation** .
+* The **- -DWI_bval** tag of V3 has been split into two: **- -DWI_bval_tensor_fitting** defines the largest b-value to use for          tensor fitting from the ACTUAL data and **- -DWI_bval_synth** defines what bvalue to use with te estimated tensors to              synthesize DWIs to be used in registration.
+* The tag **- -final_res** has been changed to “--res” to be consistent with DIFFPREP. The previous versions of DIFFPREP only        have provision to enter one  resolution parameter to output in isotropic dimension. Now, you can output in non isotropic        dimension where you can provide three parameters.
+* The tag **- -start_step** has been changed to **- -step** to be consistent with DIFFPREP.
+* Some optimization parameters have further been fine tuned.
+
+
+**DIFFCALC Changes (in addition to common changes)**
+-----------------------------------------------------
+
+* The IDL based DIFFCALC is still mostly needed in case sophisticated tensor fitting operations such as RESTORE, iRESTORE,        dual compartment fitting is needed. Additionally, to get very nice looking directionally encoded colormaps, the user is         still encouraged to use IDL based DIFFCALC provided with TORTOISE download under the DIFFCALC\diffcalc2.5 folder.
+* However, additional C++ executable based tensor fittings are also included in this version release: EstimateTensorWLLS          *weighted linear least squares*, EstimateTensorNLLS  *nonlinear fitting*.
+* MAPMRI based fitting and scalar map calculations are also included.
+* All C++ executable based tensor fitting operations can now accept voxelwise gradients originating either due to gradient        nonlinearities or nonlinear registration.
+* Several more tensor based scalar map computation executables are included.
+* ComputeGlyhMaps now colors the glyphs based on their directions.
+

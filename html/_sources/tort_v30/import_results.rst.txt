@@ -1,0 +1,31 @@
+.. import_results:
+
+**Your Import Outputs- What to expect**
+========================================
+The following files will be written in the <prefix>_proc folder that will be created outside of the raw folder, following the import routine. 
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\InkedDIFFPREP_import_outputsexample3_LI.jpg
+
+
+**example of each file is as follows**
+
+Info File
+---------
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\InkedDIFFPREP_import_example6_info_LI.png.jpg
+
+
+
+bmtxt
+-----
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DIFFPREP_import_example_4_bmtxt.png
+
+
+List File
+---------
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DIFFPREP_import_example7_list.png
+
+
+nii File
+--------
+The raw file is converted to NII format using the dcm2niix tool. No associated bvecs and bvals are saved with this nii file. You can create the associated bvecs and bvals by using the executable **TORTOISEBmatrixToFSLBVecs**. This will convert the bmtxt written in the proc folder to bvals and bvecs. Although, TORTOISE will still need .list and associated bmtxt file to perform the processing. 
+

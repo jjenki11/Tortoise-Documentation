@@ -1,0 +1,63 @@
+.. gui:
+
+
+**TORTOISE GUI**
+=================
+
+
+Launching GUI: 
+From TORTOISE_V3.0.0/TORTOISE_GUI -    please type python TORTOISEGui.py 
+The main screen will appear:
+ 
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_files\image047.png
+
+
+Please pick ‘import icon’ to go to the import screeen
+
+Please click on the import link above for more details.
+From the drop down menu please select the data type that you want to import. 
+Click import. If you checked option ‘perform gradient check after import? (Quality Control), it will write the NSDEC map and gyph images into your proc folder. Please go to QC for more details 
+       
+
+
+
+DIFFPREP GUI
+-------------------
+Please refer to section 7, step 3 to understand the various paramters that need to be set for DIFFPREP processing.
+
+.. image:: D:\TORTOISE_processing_for_manual\TORTOISE_processing_steps_for_manual\GUI\DIFFPREP31_gui.png
+ 
+Registration settings: if you click ‘load’ you can pick the saved registration settings file in your DIFF_PREP_WORK folder. 
+
+If you click on ‘…’ it will open additional options that you can pick and it will overwrite some of the options in the registration file selected. 
+ 
+Click on SAVE SETTINGS if you would like to save these new options with a new registration settings file name. 
+Please note: if you pick additional options from the drop down menu, additional tabs will appear where you can set various parameters to suit your data. Please refer to the 
+Click ‘process’ to process the data and the outputs will be written in the ‘proc’ folder.
+
+.. image:: D:\TORTOISE_processing_for_manual\TORTOISE_processing_steps_for_manual\GUI\DIFFPREP31_gui_additional_settings.png
+
+DR-BUDDI GUI
+-------------
+Please refer to section 9,step 3.1 of the manual for details about DRBUDDI processing.
+
+
+
+Click ‘run’ at the bottom of the screen to process data with DR-BUDDI. The final output will be written in a ‘…_DRBUDDI’ folder.
+
+.. image:: D:\TORTOISE_processing_for_manual\TORTOISE_processing_steps_for_manual\GUI\DRBUDDI31_gui.png
+ 
+
+.. image:: D:\TORTOISE_processing_for_manual\TORTOISE_processing_steps_for_manual\GUI\DRBUDDI31_manual_settings.png
+
+
+DIFFCALC GUI 
+-------------
+
+Please click on the import link above for more details.
+Please enter the full path to the new list file  and click on ‘convert to old DIFFCALC’. The outputs will be written in the ‘proc’ folder with the tag ‘…..OF.’
+ 
+.. image:: C:\Users\Ami\Desktop\TORTOISE_files\image052.png
+
+Please refer to https://science.nichd.nih.gov/confluence/display/nihpd/1.3.3+Running+DIFF_CALC for more details on running DIFFCALC. Following are the instructions for using DIFFCALC https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main

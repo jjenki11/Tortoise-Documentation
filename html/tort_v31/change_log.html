@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CHANGE LOG FROM TORTOISE V3.0 TO TORTOISE V3.1 &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="change-log-from-tortoise-v3-0-to-tortoise-v3-1">
+<h1><strong>CHANGE LOG FROM TORTOISE V3.0 TO TORTOISE V3.1</strong><a class="headerlink" href="#change-log-from-tortoise-v3-0-to-tortoise-v3-1" title="Permalink to this headline">¶</a></h1>
+<p><strong>Common Changes To All Modules</strong>:</p>
+<ul class="simple">
+<li>All TORTOISE modules, i.e. DIFFPREP, DRBUDDI, DIFFCALC and in the future DRTAMAS, now fully support the physical coordinate     systems as described by the NIFTI headers or DICOM tags. In all previous versions of TORTOISE, a given module used to     overwrite the header information, specifically, the direction matrices and the origin information, based on its     requirements. Therefore,  images output by TORTOISE did not align in MRI viewers that used physical coordinate systems.      Now they will.</li>
+<li>All the import routines have been changed to conform to this change.</li>
+<li>Support for sagittal and coronal acquisitions in addition to axial.</li>
+<li>All modules have been made slightly faster.</li>
+</ul>
+<div class="section" id="diffprep-changes-in-addition-to-common-changes">
+<h2><strong>DIFFPREP Changes (in addition to common changes)</strong><a class="headerlink" href="#diffprep-changes-in-addition-to-common-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>DIFFPREP can now automatically output quality control related images for the user to quickly review them. These     functionalities are based on AFNI modules   are activated only if AFNI is installed. The user can enable and disable them     with the tag <strong>- -do_QC</strong>.</li>
+<li>Instead of a listfile, bmatrix file and a NIFTI file trio, the user can now provide a NIFTI file, bvecs, bvals files and     the phase encoding direction as   inputs to DIFFPREP. If this is the case, the listfile will automatically be created.</li>
+<li>ImportDICOM_GE, ImportDICOM_Philips and ImportDICOM_Siemens executables from V.3.0.0 HAVE BEEN REMOVED. Instead, a new     import routine called ImportDICOM is   included. This executable is based on dcm2niix , with the permission of Dr. Chris     Rorden.</li>
+<li>ImportBruker executable now also outputs in physical coordinate system as defined by the method file. However, for some     animals, anatomical axial can be   different than human axial, a new tag is introduced <strong>- -convert_to_anatomical_header</strong>. If this tag is 0, the imported header will be identical to the acquisition. If the tag is set to <strong>1</strong>, coronal acquisitions will be assumed to be <strong>anatomical axials</strong> and the headers will be automatically rotated.</li>
+<li>DIFFPREP now FULLY supports gradient non-linearity maps.</li>
+<li>The non-linearity maps can be provided with the tag <strong>voxelwise_gradient_tensors</strong> and they should  be a 4D NIFTI file with dimensions Nx x Ny x Nz x 9, where the last dimension contains rowwise elements of a 3x3 diffusion gradient modifier matrix originating due to gradient nonlinearities.</li>
+<li>The tag <strong>voxelwise_gradient_space</strong> defines in which space these gradient nonlinearity tensors are defined. Do they live in the physical space of the b0   image, or do they live in the space of the structural image. Most of the time this should be     the b0 image but for example, the CONNECTOME data, it will the   structural space.</li>
+<li>A new tag <strong>- -will_be_drbuddied</strong> is introduced.  If this tag is 1, after motion and eddy currents distortion correction DIFFPREP will stop to save time and   storage space.</li>
+<li>A new tag <strong>- -center_of_mass</strong> is introduced. If the tag is set to <strong>1</strong> (which was always the case in previous versions), the image?s center of mass will be   translated to the center pixel of the image for processing. If the tag is set to <strong>0</strong>, the image will be unaltered. Default:1.This is useful for example for   non-brain data, where the acquired object is near the edge of the images instead     of the center.</li>
+<li>Output listfile name can now be fully specified. Therefore, it can be placed in another folder and have a different name.</li>
+<li>In DIFFPREP V3.0.0, Gibbs ringing correction was performed first, followed by denoising. In V3.1, processing starts with denoising first, and depending on the settings performs Gibbs ringing correction on the proc.list data AND/OR     proc_denoised.list data.</li>
+<li>The concept of <strong>template image</strong> is completely removed from DIFFPREP. Now there is only the structural and the b=0     image. Because of this change, the working field of view is not applied to the template image but the entire proc.list DWI     data by resampling it. This resampling <strong>DOES</strong> change the origin of the image but <strong>DOES NOT</strong> change the physical coordinate     system, i.e. all the images would overlay nicely in viewers that use physical coordinates.</li>
+<li>ReorientImage executable has been changed to <strong>FULL NIFTI</strong> convention. The axes have been changed accordingly as well. It can also automatically convert a non-axial image to an axial one.</li>
+<li>A new executable is introduced, <strong>CreateVoxelwiseBmatricesFromDeformationField</strong>.  This executable can be used to create     voxelwise Bmatrices due to deformation fields applied to the data, for example originating from a nonlinear registration or atlas creation procedure.</li>
+<li>Some optimization parameters in the <strong>Assets/settings</strong> folders have been further fine-tuned.</li>
+</ul>
+</div>
+<div class="section" id="drbuddi-changes-in-addition-to-common-changes">
+<h2><strong>DRBUDDI Changes (in addition to common changes)</strong><a class="headerlink" href="#drbuddi-changes-in-addition-to-common-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Some functionalities of DRBUDDI have been made significantly faster. Default disortion level setting which has been set to <strong>medium</strong> will ensure DRBUDDI running faster. The remaining disortion level settings when set, the corrections are performed on higher resolutions and the order is as follows:The first two resolutions are performed with a time varying velocity field based transformation and the highest resolution is then performed with SyN.</li>
+<li>DRBUDDI now also supports QC outputs.</li>
+<li>DRBUDDI now also supports gradient nonlinearity maps with the same tags as DIFFPREP. Please refer to DIFFPREP changes for       details.</li>
+<li>To fully support gradient non-linearity maps, all diffeomorphic registration operations are now performed in the space of       the up b=0 image. In previous versions, these operations were performed in the space of the structural image. Due to this       change, the b0_quad.nii, b0_corrected.nii bo_final_corrected.nii and structural_used.nii images will be in the space of the up b0 images. However, at the last step, DRBUDDI will still reorient all the diffusion MRI data to the space of the             original structural image, or its resampled version, which is called structural.nii.</li>
+<li>The Jacobian calculations for the CCJac and MSJac metrics have been completely changed and made more reliable and faster.       These two metrics are now significantly better than V3.0.0. However we still suggest to use a structural image and the CCSK     metric alongside one of these.</li>
+<li>DRBUDDI now fully supports datasets with FULL up acquisitions, and a single b=0 acquisition for the down dataset.</li>
+<li>IF the number of volumes and the Bmatrices match between the up and down data, DRBUDDI will still output the the combined       version. If they do not match, DRBUDDI will now automatically output the geometrically corrected and signal manipulated         versions of both data.</li>
+<li>Following the previous item, in case the two datasets do not match, the signal modulation can be performed in two ways.         Jacobian or least squares based. This is controlled by the new tag <strong>- -final_signal_modulation</strong> .</li>
+<li>The <strong>- -DWI_bval</strong> tag of V3 has been split into two: <strong>- -DWI_bval_tensor_fitting</strong> defines the largest b-value to use for          tensor fitting from the ACTUAL data and <strong>- -DWI_bval_synth</strong> defines what bvalue to use with te estimated tensors to              synthesize DWIs to be used in registration.</li>
+<li>The tag <strong>- -final_res</strong> has been changed to ?–res? to be consistent with DIFFPREP. The previous versions of DIFFPREP only        have provision to enter one  resolution parameter to output in isotropic dimension. Now, you can output in non isotropic        dimension where you can provide three parameters.</li>
+<li>The tag <strong>- -start_step</strong> has been changed to <strong>- -step</strong> to be consistent with DIFFPREP.</li>
+<li>Some optimization parameters have further been fine tuned.</li>
+</ul>
+</div>
+<div class="section" id="diffcalc-changes-in-addition-to-common-changes">
+<h2><strong>DIFFCALC Changes (in addition to common changes)</strong><a class="headerlink" href="#diffcalc-changes-in-addition-to-common-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The IDL based DIFFCALC is still mostly needed in case sophisticated tensor fitting operations such as RESTORE, iRESTORE,        dual compartment fitting is needed. Additionally, to get very nice looking directionally encoded colormaps, the user is         still encouraged to use IDL based DIFFCALC provided with TORTOISE download under the DIFFCALCdiffcalc2.5 folder.</li>
+<li>However, additional C++ executable based tensor fittings are also included in this version release: EstimateTensorWLLS          <em>weighted linear least squares</em>, EstimateTensorNLLS  <em>nonlinear fitting</em>.</li>
+<li>MAPMRI based fitting and scalar map calculations are also included.</li>
+<li>All C++ executable based tensor fitting operations can now accept voxelwise gradients originating either due to gradient        nonlinearities or nonlinear registration.</li>
+<li>Several more tensor based scalar map computation executables are included.</li>
+<li>ComputeGlyhMaps now colors the glyphs based on their directions.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>CHANGE LOG FROM TORTOISE V3.0 TO TORTOISE V3.1</strong></a><ul>
+<li><a class="reference internal" href="#diffprep-changes-in-addition-to-common-changes"><strong>DIFFPREP Changes (in addition to common changes)</strong></a></li>
+<li><a class="reference internal" href="#drbuddi-changes-in-addition-to-common-changes"><strong>DRBUDDI Changes (in addition to common changes)</strong></a></li>
+<li><a class="reference internal" href="#diffcalc-changes-in-addition-to-common-changes"><strong>DIFFCALC Changes (in addition to common changes)</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/change_log.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. CHECK YOUR IMPORT RESULTS &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE" href="anatomicals31.html" />
+    <link rel="prev" title="4. Your Import Outputs- What to expect" href="import_results31.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="anatomicals31.html" title="6. STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="import_results31.html" title="4. Your Import Outputs- What to expect"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.1</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="check-your-import-results">
+<h1>5. <strong>CHECK YOUR IMPORT RESULTS</strong><a class="headerlink" href="#check-your-import-results" title="Permalink to this headline">¶</a></h1>
+<p>Check your import results using the following tools. The outputs from running the following executables will be in the _proc folder to be viewed using any visualization software that supports the viewing of RGB format files. You will find the following executable in the ./TORTOISE31/DIFFCALC31/bin folder:</p>
+<ul>
+<li><p class="first"><em>Linear fitting</em> should be performed to output a DT.nii</p>
+<blockquote>
+<div><p><em>Usage</em>:  EstimateTensorWLLS full_path_to_listfile full_path_to_mask_file (optional)   dti_bval_cutoff (optional. all volumes will be used)</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt><em>Non symmetric heuristic maps</em>  You can check the non symm heuristic map to determine if the data has been imported correctly by checking the non symm directionally encoded color maps.</dt>
+<dd><p class="first last"><em>Usage</em>:  ComputeDECMapNS full_path_to_tensor_image</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="align-left figure">
+<img alt="../_images/symm.png" src="../_images/symm.png" />
+</div>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../_images/nonsymm.png"><img alt="../_images/nonsymm.png" src="../_images/nonsymm.png" style="height: 325px;" /></a>
+</div>
+<p><strong>GLYPHS</strong></p>
+<p>Tensor glyphs can also be viewed to determine if the import is correct</p>
+<dl class="docutils">
+<dt><em>Usage</em>: ComputeGlyphMaps  full_path_to_tensor_NIFTI_file  axis     (optional) slice_number (optional) full_path_to_output (optional)</dt>
+<dd>Axis:  axial, sagittal or coronal.  Default axial.
+slice_number: default center slice</dd>
+</dl>
+<p>Gyphs can be useful in detecting if the data has been imported correctly. It is sometimes not sufficient to look at just the axial slice as the difference maybe more evident in the coronal and/or sagittal slices. Notice in the example below, the glyphs  in the axial slice appears correct in both imports but the difference is seen in the coronal and sagittal slices.</p>
+<p><strong>Correct</strong></p>
+<img alt="../_images/correct_glyph.png" src="../_images/correct_glyph.png" />
+<p><strong>Incorrect (example when flip x and flip y are flipped)</strong></p>
+<img alt="../_images/incorrect_glyph.png" src="../_images/incorrect_glyph.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="import_results31.html"
+                        title="previous chapter">4. <strong>Your Import Outputs- What to expect</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="anatomicals31.html"
+                        title="next chapter">6. <strong>STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/check_import31.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="anatomicals31.html" title="6. STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="import_results31.html" title="4. Your Import Outputs- What to expect"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.1</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

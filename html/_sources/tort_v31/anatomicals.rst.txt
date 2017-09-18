@@ -1,0 +1,57 @@
+
+.. anatomicals:
+
+**STEP 2: PREPARING AN ANATOMICAL IMAGE FOR EPI DISTORTION CORRECTION REORIENTATION OF FINAL IMAGE**
+====================================================================================================
+
+Click here to know more about why we need to orient the images in a standard plane before processing 
+
+:download: `C:\Users\Ami\Desktop\ACPC_ami3_new.pdf`
+
+
+
+If your data has an associated T2w (fat saturated- highly recommended) dataset, EPI correction can be successfully performed using an anatomical image based registration in DIFFPREP. 
+T1W image can be used in the absence of T2w image, although the high contrast of tissue to skull may result in the correction underperforming. Changing the contrast from T1w to T2w can be performed and the resulting image be used in correction. 
+Please note: if neither T1 or T2w image is unavailable, we recommend not providing any image in the structural file tab and turning the EPI correction option off (explained in upcoming section). 
+We have adapted a practice of standardizing the diffusion data in a study by performing AC-PC alignment on the associated structural data. By identifying certain landmarks (Anterior commissure, Posterior Commissure) on the subject anatomical, we can try to reduce the variability, post processing, that may arise from subjects being scanned in various head positions. 
+We will describe both procedures with advice to choose the method best suited for your purpose and also paying close attention to the resulting output.
+
+Option1: AUTO ACPC DETECT
+--------------------------------
+
+This particular auto acpc detection software auto acpc aligns T1 contrast images to its default T1 template that comes with the package. 
+Since T2W image contrast is **required for EPI distortion correction in TORTOISE, especially DRBUDDI, you may rigidly align the T2W image to T1W image that has undergone auto acpc alignment. 
+
+**Please note** 
+If you are using on DIFFPREP processing and will not be continuing with DRBUDDI, you may provide the non oriented T2W image for the **-s** tag and provide an auto acpc aligned T1w image as a reorientation template. This will put your final reoriented image from DIFFPREP in ACPC aligned space. 
+
+The auto acpc detect software can be downloaded from the following link: http://www.nitrc.org/projects/art/
+
+
+Option2: AFNI AXIALIZATION
+--------------------------
+Please make sure you have AFNI downloaded to use this script. AFNI can be downloaded from : https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/background_install/download_links.html
+Please refer: https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/tutorials/fatcat_prep/Prepreprocessing.html#axialize-the-anatomical
+Additional points for successful use of axialization script:
+
+*  The reference image should be close in intensity and structure to the population of subjects, that are being registered to. Certain occasions, the intensity difference or large differences in structure or size can cause certain misalignment to be introduced.
+*  The postlr_symm tag can be introduced while running the script if the alignment is not fully achieved to see if things can be improved.
+*  Please consider consulting the AFNI message boards for questions regarding axialization problems.
+
+Option3: LANDMARKING AC-PC POINTS 
+---------------------------------
+
+Please note that axialization is NOT ac-pc alignment script. While, the output images may end up in AC-PC alignment depending on if the match between reference and …… image. We highly recommend checking the “…….ax.nii” output image to check if the AC-PC points are in the same axial plane. If not ac-pc aligned and/or the image has uncorrected tilt in the x, y or z direction the following are few options to consider:
+*  AFNI landmarks
+https://msu.edu/~zhuda/fmri_class/labs/lab3/afni08_talairach.pdf
+
+*  MIPAV landmarks  (https://mipav.cit.nih.gov/)
+https://mipav.cit.nih.gov/pubwiki/index.php/Select_Algorithms_and_Brain_Tools_for_Talairach_Transform
+
+*  note1: We preform ac-pc alignment in native space and do not transform the images to tailarach co-ordinates. After you pick the 5 points, please hit *apply* and then save the resulting image.
+
+*  note 2: If you have already performed axialization and are satisfied with the mid saggital alignment, just perform the AC-PC alignment by skipping the first step in the instructions. 
+
+*  note 3: MIPAV settings awareness, output file nii to make sure is not flipped after saving, the image dimension seems to change with different versions of MIPAV- so to be consistent within a study please use the  same version of MIPAV.
+
+*  note 4: The output file has an intensity that is smoother than the original image. 

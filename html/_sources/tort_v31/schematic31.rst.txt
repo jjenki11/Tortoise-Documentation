@@ -1,0 +1,10 @@
+.. schematic:
+
+**Schematic representation of the TORTOISE pipeline**
+------------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image043.png
+
+.. note:: If data has been acquired with opposite phase encoded directions, then EPI correction will be performed with DRBUDDI after DIFFPREP. 
+ 
+[4] C.Pierpaoli et al; ISMRM,Stockholm,Sweden,2010,  [5] Chang L-C et al; MRM (2005), [6] Chang L-C et al; MRM 2012

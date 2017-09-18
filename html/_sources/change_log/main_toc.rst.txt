@@ -1,0 +1,10 @@
+================================
+**CHANGE LOG**
+================================
+
+.. toctree::
+   :maxdepth: 2
+   :numbered: 3
+   :titlesonly:
+
+   change_log.rst

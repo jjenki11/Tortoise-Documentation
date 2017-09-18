@@ -1,0 +1,286 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>9. Outputs of DIFFPREP &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="10. STEP 3.1 (after DIFFPREP):DR-BUDDI" href="DRBUDDI31.html" />
+    <link rel="prev" title="8. DIFFPREP INPUT AND OUTPUT QUALITY CHECK" href="afni_qc.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="DRBUDDI31.html" title="10. STEP 3.1 (after DIFFPREP):DR-BUDDI"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="afni_qc.html" title="8. DIFFPREP INPUT AND OUTPUT QUALITY CHECK"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.1</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="outputs-of-diffprep">
+<h1>9. <strong>Outputs of DIFFPREP</strong><a class="headerlink" href="#outputs-of-diffprep" title="Permalink to this headline">¶</a></h1>
+<p>There are two scenarios under which DIFFPREP can be run. The outputs for each will be shown below. Please note that the following example outputs shown were genarated using two separate datasets (test.nii and Subject1_DTI_up.nii) and therefore you will see two different types of file names in each scenario. If you are running with or without registration settings file, the file name changes in accoradance with the inout data name or the output name you give the DIFFPREP executable.</p>
+<div class="section" id="scenario-1-diffprep-run-without-registration-settings-file">
+<h2>9.1. Scenario 1: DIFFPREP run without registration settings file.<a class="headerlink" href="#scenario-1-diffprep-run-without-registration-settings-file" title="Permalink to this headline">¶</a></h2>
+<p>The example outputs below are for a dataset of name ‘test’. The files are generated when using <strong>NO registrations settings</strong> file. Please note that there is a <strong>temp_reg_settings_3608.dmc</strong>  present inside this folder and gives information about the options used in processing.
+Here an EPI correction was performed on the data. Please note that the final image written will have a generic name <strong>_EPI_field.ni</strong>. This name can be modified to a name of choice before running DIFFPREP.
+The tensor fitting will be performed on the final image output from DIFFPREP, in this case <strong>test_proc_EPI_field.nii</strong>.</p>
+<img alt="../_images/diffprep_test_output.png" src="../_images/diffprep_test_output.png" />
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Outputs of DIFFPREP processing</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>test.info</strong></td>
+<td>Text file describing the import routine used to create
+the proc folder.</td>
+</tr>
+<tr class="row-odd"><td><strong>test.bmtxt</strong></td>
+<td>initial bmtxt of the imported raw data.</td>
+</tr>
+<tr class="row-even"><td><strong>test.list</strong></td>
+<td>A text file that describes the nii file and associated
+bmtxt for the data to be used in the diffprep processing.</td>
+</tr>
+<tr class="row-odd"><td><strong>test.nii</strong></td>
+<td>Raw dicom data saved as a 4d nii file after importing
+the data using the import routine.</td>
+</tr>
+<tr class="row-even"><td><strong>test_proc.bmtxt</strong></td>
+<td>The same as the original bmtxt.</td>
+</tr>
+<tr class="row-odd"><td><strong>test_proc.list</strong></td>
+<td>A text file that describes the nii file and associated
+bmtxt for the data to be used in the DRBUDDI processing.</td>
+</tr>
+<tr class="row-even"><td><strong>test_proc.nii</strong></td>
+<td>4dnii file with gibbs ringing and denoising correction
+applied to it.</td>
+</tr>
+<tr class="row-odd"><td><strong>test_proc_str_to_tmp_trans.hdf5</strong></td>
+<td>binary text file of the transformations from structrual
+to template.</td>
+</tr>
+<tr class="row-even"><td><strong>test_proc_noise.nii</strong></td>
+<td>The information in this file is used in the generation
+of DMC noise file. This file gives a description of the
+general noise information in the data and saved as one volume.</td>
+</tr>
+<tr class="row-odd"><td><strong>test_proc_denoised_template.nii</strong></td>
+<td>b0 image where the denoising is applied.</td>
+</tr>
+<tr class="row-even"><td><strong>test_proc_eddy_transformations.txt</strong></td>
+<td>text file with eddy transformation information.</td>
+</tr>
+<tr class="row-odd"><td><strong>test_proc_EPI_field.nii</strong></td>
+<td>Final image written out if EPI correction is switched on.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="scenario-2-diffprep-run-with-registration-settings-file">
+<h2>9.2. Scenario 2: DIFFPREP run with registration settings file<a class="headerlink" href="#scenario-2-diffprep-run-with-registration-settings-file" title="Permalink to this headline">¶</a></h2>
+<p>The example below is of a dataset by name ‘subject1_DTI_up’. This dataset was the blip up data from a pair of dataset that went through DIFFPREP before going through DRBUDDI. A full DIFFPREP was run on this dataset to show the outputs. Please refer to the section ‘If using DRBUDDI’ to understand the new feature in TORTOISE 3.1 where certain extra steps in DIFFPREP can be skipped to go directly to DRBUDDI.</p>
+<p>Dataset ‘subject1_DTI_down’ also went through DIFFPREP processing and the file names shown in the screenshot below, got replaced by subject1_DTI_down. This example was run without EPI correction on and a registration settings file was used here. Please read the notes after the description of outputs.</p>
+<img alt="../_images/DIFFPREP_example_processing1.png" src="../_images/DIFFPREP_example_processing1.png" />
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Outputs of DIFFPREP processing</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>subject1_DTI_up.info</strong></td>
+<td>Text file describing the import routine used to create
+the proc folder.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up.bmtxt</strong></td>
+<td>initial bmtxt of the imported raw data.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up.list</strong></td>
+<td>A text file that describes the nii file and associated
+bmtxt for the data to be used in the diffprep processing.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up.nii</strong></td>
+<td>Raw dicom data saved as a 4d nii file after importing
+the data using the import routine.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_proc.bmtxt</strong></td>
+<td>The same as the original bmtxt.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up_proc.list</strong></td>
+<td>A text file that describes the nii file and associated
+bmtxt for the data to be used in the DRBUDDI processing.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_proc.nii</strong></td>
+<td>4dnii file with gibbs ringing and denoising correction
+applied to it.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up_str_to_tmp_trans.hdf5</strong></td>
+<td>binary text file of the transformations from structrual
+to template.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_noise.nii</strong></td>
+<td>The information in this file is used in the generation
+of DMC noise file. This file gives a description of the
+general noise information in the data and saved as one volume.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up_denoised_template.nii</strong></td>
+<td>b0 image where the denoising is applied.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_eddy_transformations.txt</strong></td>
+<td>text file with eddy transformation information.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up_EPI_field.nii</strong></td>
+<td>Final image written out if EPI correction is switched on.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up_DMC.list</strong></td>
+<td>The final list file, that can be tensor fit using the DIFFCALC executables or        converted to IDL DIFFCALC format using the convertor described in the upcoming        sections. This list file points to the final corrected nii and bmtxt file.</td>
+</tr>
+<tr class="row-odd"><td><strong>subject1_DTI_up.bmtxt</strong></td>
+<td>final bmtxt file, where the numbers have been updated depending on the various        corrections applied to the original data. You may convert the bmtxt to produce a        bvals and bvecs file, using the excutable present in the DIFFPREP bin folder.</td>
+</tr>
+<tr class="row-even"><td><strong>subject1_DTI_up.nii</strong></td>
+<td>The final 4d nii file with all the DIFFPREP corrections applied.</td>
+</tr>
+<tr class="row-odd"><td><strong>logs</strong></td>
+<td>A folder of logs, automatically generated, containing records of registration             details. These files can referred, mainly used by TORTOISE tech support, to               understand processing errors,if any. Also contains the <strong>log_main.txt</strong> that keeps        a record of the command used in processing.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple">
+<li>There is no temp_reg_settings.dmc file generated within the proc folder as a registration settings file was provided when using the DIFFPREP command. The processing was done with the parameters that were defined in the registration settings file.</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple" start="2">
+<li>There are no EPI files in the above processed folder, as this particular dataset was run without the EPI correction switched on. The outputs of this DIFFPREP processing will be used together with the Down data processing, in the upcoming DRBUDDI processing.</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple" start="3">
+<li>If EPI correction was switched on, the final DMC outputs would have the EPI corrected data. If you are interested in looking at the outputs of the intermediate steps, please turn on ‘intermediate steps 1’ when running DIFFPREP. This will save, the outputs from the intermediate steps <strong>_rpd</strong> files for eddy and rpd EPI for EPI correction applied on the eddy corrected data. The DMC file generated from all of this, would be the eddy and EPI corrected data.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="if-using-drbuddi">
+<h2>9.3. IF USING DRBUDDI<a class="headerlink" href="#if-using-drbuddi" title="Permalink to this headline">¶</a></h2>
+<p>If you are using TORTOISE version 3.1 and you plan to do DRBUDDI31, please use the following tag ‘will be DRBUDDIED  1’  to skip few steps in DIFFPREP. Please do this for both your seprate DIFFPREP runs. The example below shows the outputs generated for the subject1_DTI_up, run through DIFFPREP, with the ‘will be DRBUDDIED’ option turned on.</p>
+<img alt="../_images/DIFFPREP_processing_example4.png" src="../_images/DIFFPREP_processing_example4.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">9. <strong>Outputs of DIFFPREP</strong></a><ul>
+<li><a class="reference internal" href="#scenario-1-diffprep-run-without-registration-settings-file">9.1. Scenario 1: DIFFPREP run without registration settings file.</a></li>
+<li><a class="reference internal" href="#scenario-2-diffprep-run-with-registration-settings-file">9.2. Scenario 2: DIFFPREP run with registration settings file</a></li>
+<li><a class="reference internal" href="#if-using-drbuddi">9.3. IF USING DRBUDDI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="afni_qc.html"
+                        title="previous chapter">8. <strong>DIFFPREP INPUT AND OUTPUT QUALITY CHECK</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="DRBUDDI31.html"
+                        title="next chapter">10. <strong>STEP 3.1 (after DIFFPREP):DR-BUDDI</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/DIFFPREPoutputs31.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="DRBUDDI31.html" title="10. STEP 3.1 (after DIFFPREP):DR-BUDDI"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="afni_qc.html" title="8. DIFFPREP INPUT AND OUTPUT QUALITY CHECK"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.1</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

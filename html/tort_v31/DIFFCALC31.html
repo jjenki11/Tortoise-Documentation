@@ -1,0 +1,151 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>12. Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.1 &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. TORTOISE GUI 3.1" href="TORTOISEGUI31.html" />
+    <link rel="prev" title="11. STEP 4:QUALITY ASSESSMENT" href="quality31.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="TORTOISEGUI31.html" title="13. TORTOISE GUI 3.1"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quality31.html" title="11. STEP 4:QUALITY ASSESSMENT"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.1 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="step5-diffcalc-tensor-fitting-in-tortoise-version-3-1">
+<h1>12. <strong>Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.1</strong><a class="headerlink" href="#step5-diffcalc-tensor-fitting-in-tortoise-version-3-1" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/tortoise_image.png"><img alt="../_images/tortoise_image.png" class="align-left" src="../_images/tortoise_image.png" style="width: 150px; height: 120px;" /></a>
+<p>Good news!!! you can now compute a few of the DTI parameters using command line DIFFCALC31 executables. If you would prefer sophisticated tensor fitting and directionally encoded color maps (DEC), you are still encouraged to use the IDL based DIFFCALC.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If TORTOISE installation has been followed and your path set then you can type any of the executable from the DIFFCALC31 folder command line and it you will see a syntax file appear in your terminal with the required inputs. If you have not set your path, then please type <strong>./</strong> before the command, from the folder.</p>
+</div>
+<p><strong>DIFFCALC folder executables</strong></p>
+<img alt="../_images/DIFFCALC_usage.png" src="../_images/DIFFCALC_usage.png" />
+<p>To derive additional DTI parameters that are not currently supported by DIFFCALC31, please perfrom the following steps to derive these metrics using the IDL DIFFCALC that is also provided with the TORTOISEV3.1 download under the main DIFFCALC folder.</p>
+<p>Following steps need to be performed to derive DTI parameters using the DIFFCALC IDL:</p>
+<ul class="simple">
+<li>Perform a nonlinear tensor fitting of the DMC file in the 3.1 version using the  executable from the DIFFCALC31 folder.</li>
+<li>From the main TORTOISE31 folder, please type in the following <strong>DIFFCALC/DIFFCALCV25/DIFFCALC/diffcalc_main/calcvm</strong> path to access the IDL based DIFFCALC. The IDL based DIFFCALC program that was part of the original released version of TORTOISE, until the current versions have been re-programmed in C++. While certain main features have been incorporated into this current 3.1 version, not all features have been completely migrated.</li>
+<li>Please type DIFFCALC in a command line. Hit enter, then type calcvm. This will open a virtual IDL environment. Click ‘ok’.</li>
+<li>A DIFFCALC GUI window will appear. Click the import tensor button and then load the tensor you computed in TORTOISE31.</li>
+<li>after a couple of automatic steps in the grey status window, you will be prompted to select a _L0.list file from the same folder where you loaded the tensor. Please click the load raw files button and you will see the newly created _L0.list file.</li>
+<li>Once selected, in a few seconds, you will have to hit the ‘restore’ button that is on the left hand corner of the GUI. This restore is merely restoration of settings.</li>
+<li>You will notice that couple additional buttons will get activated. Please click the computer eigen vectors button.</li>
+<li>Few steps will run in the background in the status window and then derive tensor button willl get activated. Please click on this button. It will take a few moments before you will see the ROI_utilities button activated.</li>
+<li>Please make sure you have saved this session, by hitting the save_session button. This will create an _L0_SAVE  folder with all the derived DTI meterics. These are nii files that are vieweable in any veiwer that supports NII files.</li>
+</ul>
+<p>For more details on the DIFFCALC IDL procedures and an explanation about each of these paramters, go to the following website: <a class="reference external" href="https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main">https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The page where you will access information about the DIFFCALC GUI is part of the wiki pages that was setup for the older versions of TORTOISE. It should be used as a reference. The syntax used in the previous versions have been updated for DIFFPREP31 and DRBUDDI31 and those listed on the old wiki pages will not be applicable here.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The final corrected <strong>list files</strong> generated in DIFFPREP31 or DRBUDDI31 can be converted to old DIFFCALC format. This will add an <strong>_OF.list</strong> to the data, that can be loaded in DIFFCALC GUI and tensor fitting routine listed under <a class="reference external" href="https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main">https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main</a> be followed. You can then perform RESTORE tensor fitting algorithm, that is beneficial in artifactual remediation, if the data has corrupt data points.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quality31.html"
+                        title="previous chapter">11. <strong>STEP 4:QUALITY ASSESSMENT</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="TORTOISEGUI31.html"
+                        title="next chapter">13. <strong>TORTOISE GUI 3.1</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/DIFFCALC31.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="TORTOISEGUI31.html" title="13. TORTOISE GUI 3.1"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quality31.html" title="11. STEP 4:QUALITY ASSESSMENT"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.1 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

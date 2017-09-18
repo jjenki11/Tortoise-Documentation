@@ -1,0 +1,59 @@
+.. DIFFCALC:
+
+
+**Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.1**
+========================================================
+
+.. image:: C:\Users\Ami\Desktop\tortoise_image.png
+   :align: left
+   :height: 120px
+   :width: 150px
+
+Good news!!! you can now compute a few of the DTI parameters using command line DIFFCALC31 executables. If you would prefer sophisticated tensor fitting and directionally encoded color maps (DEC), you are still encouraged to use the IDL based DIFFCALC.
+
+|
+|
+|
+|
+|
+|
+
+.. note:: If TORTOISE installation has been followed and your path set then you can type any of the executable from the DIFFCALC31 folder command line and it you will see a syntax file appear in your terminal with the required inputs. If you have not set your path, then please type **./** before the command, from the folder. 
+
+
+**DIFFCALC folder executables**
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DIFFCALC_usage.png
+
+
+
+To derive additional DTI parameters that are not currently supported by DIFFCALC31, please perfrom the following steps to derive these metrics using the IDL DIFFCALC that is also provided with the TORTOISEV3.1 download under the main DIFFCALC folder.
+
+Following steps need to be performed to derive DTI parameters using the DIFFCALC IDL:
+
+* Perform a nonlinear tensor fitting of the DMC file in the 3.1 version using the  executable from the DIFFCALC31 folder.
+
+* From the main TORTOISE31 folder, please type in the following **DIFFCALC/DIFFCALCV25/DIFFCALC/diffcalc_main/calcvm** path to access the IDL based DIFFCALC. The IDL based DIFFCALC program that was part of the original released version of TORTOISE, until the current versions have been re-programmed in C++. While certain main features have been incorporated into this current 3.1 version, not all features have been completely migrated.
+
+* Please type DIFFCALC in a command line. Hit enter, then type calcvm. This will open a virtual IDL environment. Click 'ok'.
+
+* A DIFFCALC GUI window will appear. Click the import tensor button and then load the tensor you computed in TORTOISE31. 
+
+* after a couple of automatic steps in the grey status window, you will be prompted to select a _L0.list file from the same folder where you loaded the tensor. Please click the load raw files button and you will see the newly created _L0.list file.
+
+* Once selected, in a few seconds, you will have to hit the 'restore' button that is on the left hand corner of the GUI. This restore is merely restoration of settings. 
+
+* You will notice that couple additional buttons will get activated. Please click the computer eigen vectors button. 
+
+* Few steps will run in the background in the status window and then derive tensor button willl get activated. Please click on this button. It will take a few moments before you will see the ROI_utilities button activated. 
+
+* Please make sure you have saved this session, by hitting the save_session button. This will create an _L0_SAVE  folder with all the derived DTI meterics. These are nii files that are vieweable in any veiwer that supports NII files.
+
+For more details on the DIFFCALC IDL procedures and an explanation about each of these paramters, go to the following website: https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main
+
+.. note:: The page where you will access information about the DIFFCALC GUI is part of the wiki pages that was setup for the older versions of TORTOISE. It should be used as a reference. The syntax used in the previous versions have been updated for DIFFPREP31 and DRBUDDI31 and those listed on the old wiki pages will not be applicable here. 
+
+.. note:: The final corrected **list files** generated in DIFFPREP31 or DRBUDDI31 can be converted to old DIFFCALC format. This will add an **_OF.list** to the data, that can be loaded in DIFFCALC GUI and tensor fitting routine listed under https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main be followed. You can then perform RESTORE tensor fitting algorithm, that is beneficial in artifactual remediation, if the data has corrupt data points. 
+
+
+

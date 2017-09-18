@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>12. TORTOISE GUI &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. CONGRATULATIONS!!! You have now completed all steps of TORTOISE processing" href="congratulations.html" />
+    <link rel="prev" title="11. Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.0" href="DIFFCALC.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="congratulations.html" title="13. CONGRATULATIONS!!! You have now completed all steps of TORTOISE processing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="DIFFCALC.html" title="11. Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.0"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.0 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tortoise-gui">
+<h1>12. <strong>TORTOISE GUI</strong><a class="headerlink" href="#tortoise-gui" title="Permalink to this headline">¶</a></h1>
+<p>Launching GUI:
+From TORTOISE_V3.0.0/TORTOISE_GUI -    please type python TORTOISEGui.py
+The main screen will appear:</p>
+<img alt="../_images/image047.png" src="../_images/image047.png" />
+<p>Please pick <strong>import icon</strong> to go to the import screeen</p>
+<p>Please click on the import link above for more details.
+From the drop down menu please select the data type that you want to import.
+Click import. If you checked option ?perform gradient check after import? (Quality Control), it will write the NSDEC map and gyph images into your proc folder. Please go to QC for more details</p>
+<div class="section" id="diffprep-gui">
+<h2>12.1. DIFFPREP GUI<a class="headerlink" href="#diffprep-gui" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to section 7, step 3 to understand the various paramters that need to be set for DIFFPREP processing.</p>
+<img alt="../_images/image048.png" src="../_images/image048.png" />
+<p>Registration settings: if you click <strong>load</strong> you can pick the saved registration settings file in your DIFF_PREP_WORK folder.</p>
+<p>If you click on <strong>?</strong> it will open additional options that you can pick and it will overwrite some of the options in the registration file selected.</p>
+<img alt="../_images/image050.png" src="../_images/image050.png" />
+<p>Click on SAVE SETTINGS if you would like to save these new options with a new registration settings file name.
+Please note: if you pick additional options from the drop down menu, additional tabs will appear where you can set various parameters to suit your data. Please refer to the
+Click <strong>process</strong> to process the data and the outputs will be written in the <strong>proc</strong> folder.</p>
+<img alt="../_images/image049.png" src="../_images/image049.png" />
+</div>
+<div class="section" id="dr-buddi-gui">
+<h2>12.2. DR-BUDDI GUI<a class="headerlink" href="#dr-buddi-gui" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to section 9,step 3.1 of the manual for details about DRBUDDI processing.</p>
+<p>Click ?run? at the bottom of the screen to process data with DR-BUDDI. The final output will be written in a ??_DRBUDDI? folder.</p>
+<img alt="../_images/image051.png" src="../_images/image051.png" />
+</div>
+<div class="section" id="diffcalc-gui">
+<h2>12.3. DIFFCALC GUI<a class="headerlink" href="#diffcalc-gui" title="Permalink to this headline">¶</a></h2>
+<p>Please click on the import link above for more details.
+Please enter the full path to the new list file  and click on ?convert to old DIFFCALC?. The outputs will be written in the ?proc? folder with the tag ??..OF.?</p>
+<img alt="../_images/image052.png" src="../_images/image052.png" />
+<p>Please refer to <a class="reference external" href="https://science.nichd.nih.gov/confluence/display/nihpd/1.3.3+Running+DIFF_CALC">https://science.nichd.nih.gov/confluence/display/nihpd/1.3.3+Running+DIFF_CALC</a> for more details on running DIFFCALC. Following are the instructions for using DIFFCALC <a class="reference external" href="https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main">https://science.nichd.nih.gov/confluence/display/nihpd/DIFF_CALC+Main</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">12. <strong>TORTOISE GUI</strong></a><ul>
+<li><a class="reference internal" href="#diffprep-gui">12.1. DIFFPREP GUI</a></li>
+<li><a class="reference internal" href="#dr-buddi-gui">12.2. DR-BUDDI GUI</a></li>
+<li><a class="reference internal" href="#diffcalc-gui">12.3. DIFFCALC GUI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="DIFFCALC.html"
+                        title="previous chapter">11. <strong>Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.0</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="congratulations.html"
+                        title="next chapter">13. <strong>CONGRATULATIONS!!! You have now completed all steps of TORTOISE processing</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v30/TORTOISEGUI.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="congratulations.html" title="13. CONGRATULATIONS!!! You have now completed all steps of TORTOISE processing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="DIFFCALC.html" title="11. Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.0"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.0 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+================================
+**TORTOISE version 3.1 Main Documentation**
+================================
+
+.. toctree::
+   :maxdepth: 2
+   :numbered: 3
+   :titlesonly:
+    
+   
+   Installation31.rst
+   schematic31.rst
+   import_step31.rst
+   import_results31.rst
+   check_import31.rst
+   anatomicals31.rst
+   eddy31.rst
+   afni_qc.rst
+   DIFFPREPoutputs31.rst
+   DRBUDDI31.rst
+   quality31.rst
+   DIFFCALC31.rst
+   TORTOISEGUI31.rst
+   congratulations.rst

@@ -1,0 +1,332 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>11. STEP 4:QUALITY ASSESSMENT &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12. Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.1" href="DIFFCALC31.html" />
+    <link rel="prev" title="10. STEP 3.1 (after DIFFPREP):DR-BUDDI" href="DRBUDDI31.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="DIFFCALC31.html" title="12. Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.1"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="DRBUDDI31.html" title="10. STEP 3.1 (after DIFFPREP):DR-BUDDI"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.1 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="step-4-quality-assessment">
+<h1>11. <strong>STEP 4:QUALITY ASSESSMENT</strong><a class="headerlink" href="#step-4-quality-assessment" title="Permalink to this headline">¶</a></h1>
+<p>After the data is processed it is important to pay attention to certain artifacts that should be checked for before tensor fitting the data. You can perform the visual checks in DIFFCALC. DIFFCALC for the moment has not been modified from its old IDL format. Since we would want to use the robust and well established methods of DIFFCALC module computing, for the moment we are introducing a <strong>Convertor</strong> that will convert the new list file to old format. <strong>._OF.list</strong> will be appended at the end of list file being converted. Simply load the <strong>.OF.list</strong> in DIFFCALC to go through the data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please refer the section on DIFFCALC for more details regarding conversion and the paramters output.</p>
+</div>
+<p>Please note that each of the artifacts are categorized into correctable and uncorrectable artifacts, that will require removing the volume or data from your group analysis.
+The presentation will guide you through identifying most common and few uncommon artifacts and certain remedies in post processing.</p>
+<div class="section" id="ghosting">
+<h2>11.1. Ghosting<a class="headerlink" href="#ghosting" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image024.png" src="../_images/image024.png" />
+<ul class="simple">
+<li><ol class="first loweralpha">
+<li>Raw, TORTOISE imported view of the corrupted data</li>
+</ol>
+</li>
+<li><ol class="first loweralpha" start="2">
+<li>Directionally encoded color map of the corrupted data</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="ghosting-due-to-fat">
+<h2>11.2. Ghosting due to fat<a class="headerlink" href="#ghosting-due-to-fat" title="Permalink to this headline">¶</a></h2>
+<p>a       b       c       d</p>
+<img alt="../_images/image025.png" src="../_images/image025.png" />
+<p>a)      Raw DWI with the artifact, b) TR , c) FA , d) DEC map, e) CHI square map
+The fat ghost (this example in the frontal lobe) can show anisotropic features (as seen in FA and DEC maps) and can alter your results. Therefore is important to keep note of datasets affected by such artifacts and use caution when interpreting results, especially in the affected areas.</p>
+</div>
+<div class="section" id="reciver-transmitter-coil-artifact">
+<h2>11.3. Reciver/Transmitter coil artifact<a class="headerlink" href="#reciver-transmitter-coil-artifact" title="Permalink to this headline">¶</a></h2>
+<ol class="loweralpha simple">
+<li>Coil sensitivity artifact</li>
+</ol>
+<img alt="../_images/image026.jpg" src="../_images/image026.jpg" />
+<ol class="loweralpha simple" start="2">
+<li>Signal inhomogeneity artifact</li>
+</ol>
+<img alt="../_images/image027.jpg" src="../_images/image027.jpg" />
+</div>
+<div class="section" id="averaging-at-the-scanner-artifact">
+<h2>11.4. Averaging at the scanner artifact<a class="headerlink" href="#averaging-at-the-scanner-artifact" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image026.png" src="../_images/image026.png" />
+<ul class="simple">
+<li><ol class="first loweralpha">
+<li>Averaged replicates with the  8th DWI showing  reconstruction artifact(c)</li>
+</ol>
+</li>
+<li><ol class="first loweralpha" start="2">
+<li>Resulting tensor fitting from corrupted data due to the lack of additional uncorrupted volumes.</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="signal-scaling-artifact">
+<h2>11.5. Signal scaling artifact<a class="headerlink" href="#signal-scaling-artifact" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>a)first replicates with different signal gain then the rest of the replicates</li>
+</ul>
+<img alt="../_images/image022.jpg" src="../_images/image022.jpg" />
+<ul class="simple">
+<li><ol class="first loweralpha" start="2">
+<li>first replicates with different signal gain then the rest of the replicates</li>
+</ol>
+</li>
+</ul>
+<img alt="../_images/image029.jpg" src="../_images/image029.jpg" />
+</div>
+<div class="section" id="slice-dropuout-due-to-motion">
+<h2>11.6. Slice dropuout due to motion<a class="headerlink" href="#slice-dropuout-due-to-motion" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image031.png" src="../_images/image031.png" />
+<ol class="loweralpha simple">
+<li>All slice view of the volume affected by signal dropout. b) sagittal view of the volume</li>
+</ol>
+<p>Remedy: The slice dropout due to motion is correctable in post processing either by removing the affected volume or by using RESTORE tensor fitting algorithm. For both these solutions, it is important that your data has enough number of volumes to account for the loss of data points.</p>
+</div>
+<div class="section" id="example-of-correction-stages-to-remedy-signal-dropuout-artifact-in-diffcalc">
+<h2>11.7. example of correction stages to remedy signal dropuout artifact in DIFFCALC<a class="headerlink" href="#example-of-correction-stages-to-remedy-signal-dropuout-artifact-in-diffcalc" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image032.png" src="../_images/image032.png" />
+</div>
+<div class="section" id="interslice-motion-artifact">
+<h2>11.8. Interslice motion artifact<a class="headerlink" href="#interslice-motion-artifact" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image030.png" src="../_images/image030.png" />
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>a) All slice view of volume affected by interleave motion.</p>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>b) sagittal view of the corrupt volume</p>
+</div>
+<div class="section" id="dec-map-output-including-and-excluding-the-corrupt-volume">
+<h2>11.9. DEC map output including and excluding the corrupt volume<a class="headerlink" href="#dec-map-output-including-and-excluding-the-corrupt-volume" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image034.png" src="../_images/image034.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The arrows, inserted by author, points to the artifactual and corrected regions that are clearly seen on the DEC map.</p>
+</div>
+<ul class="simple">
+<li>Left: DEC map of data with the corrupt volume. Red arrow shows the residual uncorrected data points.</li>
+</ul>
+<p>Remedy: If you notice volumes affected by these interslice motion artifacts, please remove the corrupt volume before performing tensor fitting.</p>
+<ul class="simple">
+<li>Right: DEC map of data after the corrupt volume is removed. Green arrow shows a cleaner map.</li>
+</ul>
+</div>
+<div class="section" id="cardiac-pulsation-artifact">
+<h2>11.10. Cardiac pulsation artifact<a class="headerlink" href="#cardiac-pulsation-artifact" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image035.png" src="../_images/image035.png" />
+<ul class="simple">
+<li><ol class="first loweralpha">
+<li>All volume view at the level of brain stem showing the cardiac pulsation artifact.</li>
+</ol>
+</li>
+<li><ol class="first loweralpha" start="2">
+<li>Axial slice displaying the cardiac artifact resulting in signal loss at the level of the cerebellum.</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="correction-stages-for-cardiac-pulsation-artifact">
+<h2>11.11. Correction stages for Cardiac pulsation artifact<a class="headerlink" href="#correction-stages-for-cardiac-pulsation-artifact" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image036.png" src="../_images/image036.png" />
+<p>Please note: The arrows, inserted by author, points to the artifactual and corrected regions that are clearly seen on the DEC map.</p>
+<ul class="simple">
+<li>Left: DEC map after Non linear tensor fitting without correction.</li>
+<li>Middle: DEC map after RESTORE tensor fitting- artifact removed</li>
+<li>Right:Outlier Map, that is generated when running RESTORE tensor fitting, shows the corrupt data points removed when performing tensor fitting.</li>
+</ul>
+</div>
+<div class="section" id="spike-rf-noise-artifact">
+<h2>11.12. Spike/RF noise artifact<a class="headerlink" href="#spike-rf-noise-artifact" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image037.png" src="../_images/image037.png" />
+<p><em>b</em></p>
+<img alt="../_images/image038.jpg" src="../_images/image038.jpg" />
+<ul class="simple">
+<li><ol class="first loweralpha">
+<li>All volume view of the dataset showing (circled in red) volumes affected by spike/rf noise artifact.</li>
+</ol>
+</li>
+<li><ol class="first loweralpha" start="2">
+<li>DMC data (output from TOROISE processing) reorientes the artifact to present itself diagonally.</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="correction-stages-for-spike-artifact">
+<h2>11.13. Correction stages for spike artifact<a class="headerlink" href="#correction-stages-for-spike-artifact" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image039.png" src="../_images/image039.png" />
+<ul class="simple">
+<li>Left: DEC map after Non linear tensor fitting without correction.</li>
+<li>Middle: DEC map after RESTORE tensor fitting- artifact removed</li>
+<li>Right:Outlier Map, that is generated when running RESTORE tensor fitting, shows the corrupt data points removed when performing tensor fitting.</li>
+</ul>
+</div>
+<div class="section" id="epi-distortion-presentation-and-correction-in-traditional-single-phase-encoded-dti-human-data">
+<h2>11.14. EPI distortion presentation and correction in traditional, single phase encoded DTI human data<a class="headerlink" href="#epi-distortion-presentation-and-correction-in-traditional-single-phase-encoded-dti-human-data" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image040.png" src="../_images/image040.png" />
+<ul class="simple">
+<li><ol class="first loweralpha">
+<li>b0 original image</li>
+</ol>
+</li>
+<li><ol class="first loweralpha" start="2">
+<li>T2 fat sat structural image AC-PC aligned</li>
+</ol>
+</li>
+<li><ol class="first loweralpha" start="3">
+<li>Quadratic corrected image</li>
+</ol>
+</li>
+<li><ol class="first loweralpha" start="4">
+<li>Quadratic+elastic corrected image (with bspline correction)</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="epi-distortion-presenation-and-correction-in-2-way-phase-encoded-dti-human-data">
+<h2>11.15. EPI distortion presenation and correction in 2-way phase encoded DTI human data<a class="headerlink" href="#epi-distortion-presenation-and-correction-in-2-way-phase-encoded-dti-human-data" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image041.png" src="../_images/image041.png" />
+</div>
+<div class="section" id="epi-disortion-presentation-and-correction-in-4-way-phase-encoded-dti-human-data">
+<h2>11.16. EPI disortion presentation and correction in 4-way phase encoded DTI human data<a class="headerlink" href="#epi-disortion-presentation-and-correction-in-4-way-phase-encoded-dti-human-data" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image042.png" src="../_images/image042.png" />
+</div>
+<div class="section" id="animal-data-example-in-vivo-ferret-dataset-with-extreme-disortions">
+<h2>11.17. Animal data example: In-vivo ferret dataset with extreme disortions<a class="headerlink" href="#animal-data-example-in-vivo-ferret-dataset-with-extreme-disortions" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/image040.jpg" src="../_images/image040.jpg" />
+</div>
+<div class="section" id="data-import-errors-viewable-in-diffcalc-gui">
+<h2>11.18. Data import errors: viewable in DIFFCALC GUI<a class="headerlink" href="#data-import-errors-viewable-in-diffcalc-gui" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">green arrows= correct, red arrows= incorrect.</p>
+</div>
+<p><em>Wrong Import</em></p>
+<img alt="../_images/image044.png" src="../_images/image044.png" />
+<p><em>Correct Import</em></p>
+<img alt="../_images/image045.png" src="../_images/image045.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">11. <strong>STEP 4:QUALITY ASSESSMENT</strong></a><ul>
+<li><a class="reference internal" href="#ghosting">11.1. Ghosting</a></li>
+<li><a class="reference internal" href="#ghosting-due-to-fat">11.2. Ghosting due to fat</a></li>
+<li><a class="reference internal" href="#reciver-transmitter-coil-artifact">11.3. Reciver/Transmitter coil artifact</a></li>
+<li><a class="reference internal" href="#averaging-at-the-scanner-artifact">11.4. Averaging at the scanner artifact</a></li>
+<li><a class="reference internal" href="#signal-scaling-artifact">11.5. Signal scaling artifact</a></li>
+<li><a class="reference internal" href="#slice-dropuout-due-to-motion">11.6. Slice dropuout due to motion</a></li>
+<li><a class="reference internal" href="#example-of-correction-stages-to-remedy-signal-dropuout-artifact-in-diffcalc">11.7. example of correction stages to remedy signal dropuout artifact in DIFFCALC</a></li>
+<li><a class="reference internal" href="#interslice-motion-artifact">11.8. Interslice motion artifact</a></li>
+<li><a class="reference internal" href="#dec-map-output-including-and-excluding-the-corrupt-volume">11.9. DEC map output including and excluding the corrupt volume</a></li>
+<li><a class="reference internal" href="#cardiac-pulsation-artifact">11.10. Cardiac pulsation artifact</a></li>
+<li><a class="reference internal" href="#correction-stages-for-cardiac-pulsation-artifact">11.11. Correction stages for Cardiac pulsation artifact</a></li>
+<li><a class="reference internal" href="#spike-rf-noise-artifact">11.12. Spike/RF noise artifact</a></li>
+<li><a class="reference internal" href="#correction-stages-for-spike-artifact">11.13. Correction stages for spike artifact</a></li>
+<li><a class="reference internal" href="#epi-distortion-presentation-and-correction-in-traditional-single-phase-encoded-dti-human-data">11.14. EPI distortion presentation and correction in traditional, single phase encoded DTI human data</a></li>
+<li><a class="reference internal" href="#epi-distortion-presenation-and-correction-in-2-way-phase-encoded-dti-human-data">11.15. EPI distortion presenation and correction in 2-way phase encoded DTI human data</a></li>
+<li><a class="reference internal" href="#epi-disortion-presentation-and-correction-in-4-way-phase-encoded-dti-human-data">11.16. EPI disortion presentation and correction in 4-way phase encoded DTI human data</a></li>
+<li><a class="reference internal" href="#animal-data-example-in-vivo-ferret-dataset-with-extreme-disortions">11.17. Animal data example: In-vivo ferret dataset with extreme disortions</a></li>
+<li><a class="reference internal" href="#data-import-errors-viewable-in-diffcalc-gui">11.18. Data import errors: viewable in DIFFCALC GUI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="DRBUDDI31.html"
+                        title="previous chapter">10. <strong>STEP 3.1 (after DIFFPREP):DR-BUDDI</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="DIFFCALC31.html"
+                        title="next chapter">12. <strong>Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.1</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/quality31.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="DIFFCALC31.html" title="12. Step5: DIFFCALC TENSOR FITTING in TORTOISE VERSION 3.1"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="DRBUDDI31.html" title="10. STEP 3.1 (after DIFFPREP):DR-BUDDI"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.1 Main Documentation</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

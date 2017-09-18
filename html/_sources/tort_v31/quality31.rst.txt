@@ -1,0 +1,215 @@
+.. quality:
+
+
+**STEP 4:QUALITY ASSESSMENT**
+===============================
+
+After the data is processed it is important to pay attention to certain artifacts that should be checked for before tensor fitting the data. You can perform the visual checks in DIFFCALC. DIFFCALC for the moment has not been modified from its old IDL format. Since we would want to use the robust and well established methods of DIFFCALC module computing, for the moment we are introducing a **Convertor** that will convert the new list file to old format. **._OF.list** will be appended at the end of list file being converted. Simply load the **.OF.list** in DIFFCALC to go through the data. 
+
+
+.. note:: Please refer the section on DIFFCALC for more details regarding conversion and the paramters output.
+
+Please note that each of the artifacts are categorized into correctable and uncorrectable artifacts, that will require removing the volume or data from your group analysis.
+The presentation will guide you through identifying most common and few uncommon artifacts and certain remedies in post processing.
+
+
+
+Ghosting
+-----------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image024.png
+
+
+* a)	Raw, TORTOISE imported view of the corrupted data
+* b)	 Directionally encoded color map of the corrupted data
+
+.. Remedy:: If your data is affected by such exaggerated ghosting artifacts, it should not be included in your analysis as it is uncorrectable. Minor, non-intrusive ghosting is is acceptable.
+
+
+Ghosting due to fat
+---------------------
+a	b	c	d
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image025.png
+
+a)	Raw DWI with the artifact, b) TR , c) FA , d) DEC map, e) CHI square map
+The fat ghost (this example in the frontal lobe) can show anisotropic features (as seen in FA and DEC maps) and can alter your results. Therefore is important to keep note of datasets affected by such artifacts and use caution when interpreting results, especially in the affected areas.
+
+
+
+
+Reciver/Transmitter coil artifact
+--------------------------------------
+a) Coil sensitivity artifact
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image026.jpg
+
+b) Signal inhomogeneity artifact
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image027.jpg
+
+
+
+Averaging at the scanner artifact
+------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image026.png
+
+
+* a)	Averaged replicates with the  8th DWI showing  reconstruction artifact(c) 
+* b)	Resulting tensor fitting from corrupted data due to the lack of additional uncorrupted volumes. 
+
+.. Remedy:: If data is averaged and there is an artifact, post processing methods such as RESTORE tensor fitting will be unable to correct the corrupted volume. 
+
+
+
+Signal scaling artifact
+-------------------------
+
+* a)first replicates with different signal gain then the rest of the replicates
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image022.jpg
+
+* b) first replicates with different signal gain then the rest of the replicates
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image029.jpg
+
+
+
+.. Remedy:: Remove the volumes affected by the artifact (in this case the first replicate). 
+
+
+
+Slice dropuout due to motion
+-----------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image031.png
+
+a)	All slice view of the volume affected by signal dropout. b) sagittal view of the volume
+
+Remedy: The slice dropout due to motion is correctable in post processing either by removing the affected volume or by using RESTORE tensor fitting algorithm. For both these solutions, it is important that your data has enough number of volumes to account for the loss of data points. 
+
+
+example of correction stages to remedy signal dropuout artifact in DIFFCALC
+------------------------------------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image032.png
+
+
+Interslice motion artifact
+---------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image030.png
+
+
+*a) All slice view of volume affected by interleave motion.
+
+*b) sagittal view of the corrupt volume
+
+
+DEC map output including and excluding the corrupt volume
+-----------------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image034.png
+
+
+.. note:: The arrows, inserted by author, points to the artifactual and corrected regions that are clearly seen on the DEC map.
+
+* Left: DEC map of data with the corrupt volume. Red arrow shows the residual uncorrected data points.
+
+Remedy: If you notice volumes affected by these interslice motion artifacts, please remove the corrupt volume before performing tensor fitting. 
+    
+* Right: DEC map of data after the corrupt volume is removed. Green arrow shows a cleaner map.  
+
+
+Cardiac pulsation artifact
+----------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image035.png  
+
+* a) All volume view at the level of brain stem showing the cardiac pulsation artifact.
+* b) Axial slice displaying the cardiac artifact resulting in signal loss at the level of the cerebellum.
+
+Correction stages for Cardiac pulsation artifact
+--------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image036.png
+
+
+Please note: The arrows, inserted by author, points to the artifactual and corrected regions that are clearly seen on the DEC map. 
+
+* Left: DEC map after Non linear tensor fitting without correction.	
+* Middle: DEC map after RESTORE tensor fitting- artifact removed	
+* Right:Outlier Map, that is generated when running RESTORE tensor fitting, shows the corrupt data points removed when performing tensor fitting. 
+
+
+Spike/RF noise artifact
+-------------------------
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image037.png
+
+*b*
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image038.jpg
+
+
+* a) All volume view of the dataset showing (circled in red) volumes affected by spike/rf noise artifact. 
+* b) DMC data (output from TOROISE processing) reorientes the artifact to present itself diagonally.
+
+Correction stages for spike artifact
+---------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image039.png
+
+
+* Left: DEC map after Non linear tensor fitting without correction.	
+* Middle: DEC map after RESTORE tensor fitting- artifact removed	
+* Right:Outlier Map, that is generated when running RESTORE tensor fitting, shows the corrupt data points removed when performing tensor fitting. 
+
+
+
+EPI distortion presentation and correction in traditional, single phase encoded DTI human data
+----------------------------------------------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image040.png
+
+* a) b0 original image
+* b) T2 fat sat structural image AC-PC aligned
+* c) Quadratic corrected image
+* d) Quadratic+elastic corrected image (with bspline correction)
+
+
+
+EPI distortion presenation and correction in 2-way phase encoded DTI human data 
+----------------------------------------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image041.png
+
+
+EPI disortion presentation and correction in 4-way phase encoded DTI human data
+----------------------------------------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image042.png
+
+
+
+Animal data example: In-vivo ferret dataset with extreme disortions
+----------------------------------------------------------------------
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image040.jpg
+
+
+Data import errors: viewable in DIFFCALC GUI
+----------------------------------------------
+
+.. note:: green arrows= correct, red arrows= incorrect.
+
+
+*Wrong Import*
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image044.png
+
+
+*Correct Import*
+
+.. image:: C:\Users\Ami\Desktop\DIFFPREP_files\image045.png
+

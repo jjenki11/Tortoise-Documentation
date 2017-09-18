@@ -1,0 +1,111 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>INTRODUCTION &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1><strong>INTRODUCTION</strong><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/diffprep.png"><img alt="../_images/diffprep.png" class="align-left" src="../_images/diffprep.png" style="width: 150px;" /></a>
+<a class="reference internal image-reference" href="../_images/DRBUDDI.png"><img alt="../_images/DRBUDDI.png" class="align-left" src="../_images/DRBUDDI.png" style="width: 150px;" /></a>
+<a class="reference internal image-reference" href="../_images/tortoise_image.png"><img alt="../_images/tortoise_image.png" class="align-left" src="../_images/tortoise_image.png" style="width: 150px; height: 120px;" /></a>
+<p>TORTOISE is comprised of the following tools:</p>
+<ul class="simple">
+<li><strong>DIFFPREP [1]</strong>- Distortion and motion correction module:  <cite>Link text  Command Line</cite>   and    <cite>Link text GUI</cite></li>
+<li><strong>DR-BUDDI [2]</strong> - EPI distortion correction module, run after DIFFPREP processing and if 2 or 4 opposite phase encode direction data present</li>
+<li><strong>DIFFCALC [3]</strong>- Tensor fitting and post processing correction module</li>
+</ul>
+<p>In its newest form, DIFFPREP and DR-BUDDI modules have been revived rom TORTOISE 2.5.1 and repackaged. DIFFPREP is primarily used in importing raw images, performing motion+eddy and EPI distortion corrections, as well as  reorientation to a template space (if provided). Importantly,  DIFFPREP has now been re-designed to run fully in C++ and does not require an IDL  license or VM (yay!)– it is even executable from the command line.
+Some of the new features incorporated into the new DIFFPREP (and few in common with DR-BUDDI are as follows):</p>
+<ul class="simple">
+<li>Batch capability for import and processing the data</li>
+<li>Raw images converted to NIFTI format</li>
+<li>No IDL license requirement</li>
+<li>Gibbs ringing artifact removal</li>
+<li>Data denoising</li>
+<li>Improved image-based EPI distortion algorithm</li>
+<li>A detailed log of import and processing procedures</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v31/introduction31.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

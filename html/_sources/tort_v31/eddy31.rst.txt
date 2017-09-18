@@ -1,0 +1,54 @@
+
+.. eddy:
+
+**STEP 3: EDDY MOTION AND EPI DISTORTION CORRECTION**
+======================================================
+
+Please note: It is strongly recommended to check your data for artifacts especially if it affects the first b0 image. Since in DIFFPREP processing, the corrections are performed using b0 as the template, it is important that this volume is artifact free. The software by default uses the first b0 but you have an option to specify the b0 volume you would like to use as the template, if the first b0 has some artifacts such as slice dropout or signal inhomogeneity artifacts. 
+If your first b0 has interleave slice motion artifact, please delete the volume before processing through DIFFPREP and the software will use the next b0 in the series. 
+
+Syntax to run the DIFFPREP command and various tags are shown here. These options also come up when you type DIFFPREP in your terminal from inside the bin folder.
+
+.. note:: If TORTOISE is added to your path using the above instructions for the different OS listed, you can run the various executables listed in the upcmoming sections by just typing them in the terminal. If TORTOISE is not added to your path, then you will have to go to the folder where the executables exist and run with a **./** before running command of interest.
+
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DIFFPREP_usage_2.png
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\DIFFPREP_usage_2_2.png
+.. image:: C:\Users\Ami\Downloads\qc_screenshot.png
+
+
+.. note:: If you have AFNI installed on your computer, the now when running DIFFPREP, it will output a folder by name QC in your _proc folder. Please refer to the **section 11 DIFFPREP input and output quality check** for more information on the outputs generated in the QC folder. You can turn off this feature by using the tag **- -do_qc 0** and the QC folder will not be generated.
+
+Registration settings file will be provided in the TORTOISE folder under the name 'example registration settings.dmc' which is set with default settings or to which you can add other options that would be consistently used across all subjects. If you would like to overwrite the registration settings, then the options given in the command line takes higher priority over what is in the settings file. A log of the command run will be saved in the log folder for future reference. This is further explained in the 'outputs of DIFFPREP section'.
+
+.. note:: 1) Please create a **DIFF_PREP_WORK** folder in your home directory and copy the example registration settings.dmc file in to the folder. The software expects the settings file to be in the DIFF_PREP_WORK folder.
+
+
+.. note:: 2) If you are processing human data, you are not required to provide a registration settings file and the software will process the data with preset options. The options used in processing such datasets, will be written in the **proc** **folder as** **.dmc**. **The output resolution will be in the native resolution of the image.**
+
+
+.. note:: 3) You may modify the registration settings file before processing to suit your study. The options are explained in the registration settings.dmc (can open with any text editor) and the same file can be used for the entire study.
+
+.. note:: 4) You may use 'will_be_drbuddied  1' option to turn on this tag. This will run the only the motion and eddy distortion correction in DIFFPREP. You may then refer to section on DRBUDDI for further steps in generating EPI corrected data. Also refer the section on DIFFPREP outputs to see what outputs will be generated in the proc folder if the will_be_drbuddied option is turned on. 
+
+.. note:: 5) It is essential to look at your bmtxt files for both **up** and **down** data to make sure they match. For optimal use of DRBUDDI correction, the signs on all columns and rows in the up_bmtxt should match to the corresponding rows and columns in the down_bmtxt file. Please refer to DRBUDDI section for information on outputs if these two bmtxts do not match.
+
+
+
+Registration steps during DIFFPREP
+------------------------------------------
+
+
+The screenshot will show you an example of the processing steps that occur when running DIFFPREP.  
+
+
+The steps are as follows and depending on your registration settings. The example shown here is for a dataset run with the following settings: gibbs ringing correction-on, denoising-on, no EPI disortion correction. 
+
+
+.. image:: C:\Users\Ami\Desktop\TORTOISE_processing_steps_for_manual\InkedDIFFPREP_processing_example2_LI.png.jpg
+
+
+
+
+
+.. note:: Notice the congratulations message at the end of diffprep processing. This is good news as if things did not run correctly, error messages would be displayed in the terminal. It is adviced you note any error message displayed. Most of it will clearly indicate the issues and would be easy to troubleshoot by the user. Certain occcasions, few error messages are hard to troubleshoot and it would be helpful for TORTOISE tech support if a screenshot of the error is sent over together with the description of how the data was run using the diffprep command. It is best to also check the outputs generated, which are explained in the upcoming section.

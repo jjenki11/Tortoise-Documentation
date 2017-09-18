@@ -1,0 +1,57 @@
+
+===================
+**INSTALLING TORTOISE**
+===================
+
+**LINUX**
+----------
+
+* Download 
+
+* Extract to a folder.
+
+* In a terminal type the following **echo $SHELL**
+
+* after typing echo shell command, if terminal returns **tcsh** type  **tcsh  ./install_tcsh tcsh**
+
+* after typing echo shell command, if terminal returns **tcsh** type **bash ./install_bash.sh**
+
+Now, TORTOISE has been added to your path and you can just run any TORTOISE command by typing it in the terminal.
+
+
+**MAC**
+-------
+
+* Extract to a folder.
+
+* In a terminal type the following **echo $SHELL**
+
+* after typing echo shell command, if terminal returns **tcsh** type  **tcsh  ./install_tcsh tcsh**
+
+* after typing echo shell command, if terminal returns **tcsh** type **bash ./install_bash.sh**
+
+Now, TORTOISE has been added to your path and you can just run any TORTOISE command by typing it in the terminal.
+
+
+**WINDOWS**
+-----------
+
+The support for windows version of TORTOISE has been discontinued. 
+This is because , windows 10 now fully supports Ubuntu subsystem which can be downloaded from windows store. With this installed, in a command line, the users can type bash and be able to use the TORTOISE linux version. Please follow the steps detailed under linux installation above, if using Windows OS. 
+
+.. note:: If TORTOISE is added to your path using the above instructions for the different OS listed, you can run the various executables listed in the upcmoming sections by just typing them in the terminal. If TORTOISE is not added to your path, then you will have to go to the folder where the executables exist and run with a **./** before running command of interest.
+
+*TORTOISE GUI*
+--------------
+
+Along with command line feature, there is a TORTOISE GUI available in a separate folder when you download the TORTOISE software onto your selected OS. You will find insde the TORTOISEGUI folder a executable by name TORTOISEgui.py.  
+Please refer to section 12 of this documentation for information on the GUI features. 
+
+In MAC, To run TORTOISE GUI, PYQT4 needs to be installed using instructions below:
+Only on YOSEMITE (10.10.5)  - https://github.com/FXIhub/owl/wiki/Installation-instructions-for-MacOS-(Yosemite-10.10.3)
+
+Or 
+For other mac OS
+
+https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/background_install/install_instructs/steps_mac.html
+

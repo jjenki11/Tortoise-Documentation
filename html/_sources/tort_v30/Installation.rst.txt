@@ -1,0 +1,60 @@
+
+===================
+**INSTALLING TORTOISE**
+===================
+
+**LINUX**
+----------
+
+*TORTOISE COMMAND LINE*
+
+
+Download
+
+Extract to a folder.
+
+Add that folder to your PATH variable.
+
+**MAC**
+-------
+*TORTOISE COMMAND LINE*
+
+
+Download
+
+Extract to a folder.
+Add that folder to your PATH variable.
+
+
+*TORTOISE GUI*
+
+
+To run TORTOISE GUI, PYQT4 needs to be installed using instructions below:
+Only on YOSEMITE (10.10.5)  - https://github.com/FXIhub/owl/wiki/Installation-instructions-for-MacOS-(Yosemite-10.10.3)
+
+Or 
+For other mac OS
+
+https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/background_install/install_instructs/steps_mac.html
+
+
+
+**WINDOWS**
+-----------
+
+*TORTOISE COMMAND LINE*
+
+
+
+Download
+
+Extract to a folder.
+
+Add that folder to your PATH variable.
+(Important note for Windows : PATHS TO INPUTS MUST BE GIVEN WITH "/" (SLASH) as the separators. NOT "\" (BACKSLASH) 
+
+*TORTOISE GUI*
+---------------
+
+Along with command line feature, there is a TORTOISE GUI available in a separate folder when you download the TORTOISE software onto your selected OS. You will find insde the TORTOISEGUI folder a executable by name TORTOISEgui.py.  
+Please refer to section 12 of this documentation for information on the GUI features. 

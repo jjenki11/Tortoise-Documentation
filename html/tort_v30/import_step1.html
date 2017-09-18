@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3. STEP1:IMPORT DATA &#8212; TORTOISE  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Your Import Outputs- What to expect" href="import_results.html" />
+    <link rel="prev" title="2. Schematic represenation of the TORTOISE pipeline" href="schematic.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="import_results.html" title="4. Your Import Outputs- What to expect"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="schematic.html" title="2. Schematic represenation of the TORTOISE pipeline"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" accesskey="U"><strong>TORTOISE version 3.0</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="step1-import-data">
+<span id="importstep1"></span><h1>3. <strong>STEP1:IMPORT DATA</strong><a class="headerlink" href="#step1-import-data" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/diffprep.png"><img alt="../_images/diffprep.png" class="align-left" src="../_images/diffprep.png" style="width: 150px;" /></a>
+<p>Some helpful tips before importing data:</p>
+<ul class="simple">
+<li>Please make sure that the folder to be imported contains only diffusion data. If you are not sure, please convert the dicoms to nifti using the mricron <em>dcm2nii</em> tool. This should convert diffusion files into nii with associated bvals and bvecs. If structural was present in the same folder, it would not have an associated bvals and bvecs file.</li>
+<li>It is advisable to open your nii file and look at the data in any visualization software to make sure the data has the expected number of volumes.</li>
+<li>Once you import the data, please make sure you check your data before processing to make sure the gradient information has been correctly recorded. The reliable way to check the gradient information is to check the line fields or the non symmetric heures color map (tool included). The import tool relies on information present in the header file and if it is incorrect it will be translated into your data and processing. So this checking, especially for new studies, is highly recommended.</li>
+<li>The new import tools is capable of reading direction information from the header. Although, if your data contains intermediate b values (for ex: 200, 500, 1000) then please provide a gradient text file that is scaled to the maximum bvalue.The gradient text file will have tab separated three columns, with the same number of rows as the total volumes in the data to be imported. The top row will have the number of rows in the text file listed.</li>
+</ul>
+<p>Please remember, if you use this version, all the following steps in DIFFPREP and DRBUDDI should be</p>
+<blockquote>
+<div>performed with the executables from this version.</div></blockquote>
+<p>Please click on the following import options to go directly to the associated section:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#doc-imp-role1"><span class="std std-ref">IMPORT GE DICOM, PHILIPS DICOM, SIEMENS DICOM</span></a></li>
+<li><a class="reference internal" href="#doc-imp-role2"><span class="std std-ref">IMPORT GE DICOM</span></a></li>
+<li><a class="reference internal" href="#doc-imp-role3"><span class="std std-ref">IMPORT SIEMENS DICOM</span></a></li>
+<li><a class="reference internal" href="#doc-imp-role4"><span class="std std-ref">IMPORT PHILIPS DICOM</span></a></li>
+<li><a class="reference internal" href="#doc-imp-role5"><span class="std std-ref">IMPORT NIFTI</span></a></li>
+</ul>
+<div class="section" id="import-bruker">
+<h2>3.1. IMPORT BRUKER<a class="headerlink" href="#import-bruker" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/importbruker_new.png" src="../_images/importbruker_new.png" />
+<p>The syntax is as shown in the last line of the screenshot. If you would like to rename the output folder, please give it a full path to output folder and a <em>_proc</em> will be added to this new name. If not provided, <em>_proc</em> will be added to the original input folder.</p>
+</div>
+<div class="section" id="import-ge-dicom-philips-dicom-siemens-dicom">
+<span id="doc-imp-role1"></span><h2>3.2. IMPORT GE DICOM, PHILIPS DICOM, SIEMENS DICOM<a class="headerlink" href="#import-ge-dicom-philips-dicom-siemens-dicom" title="Permalink to this headline">¶</a></h2>
+<p>The dicom import for all three scanners (GE, Seiemens and Philips) are similar with the exact same option.
+Please note: The big delta and small delta information is measured at the scanner using an oscillopscope and needs to be provided when you have very high bvalues (&gt;2000)</p>
+<img alt="../_images/importGE_new.png" src="../_images/importGE_new.png" />
+<p>These tools can be called  and used from command line using the following syntaxes:</p>
+</div>
+<div class="section" id="import-ge-dicom">
+<span id="doc-imp-role2"></span><h2>3.3. IMPORT GE DICOM<a class="headerlink" href="#import-ge-dicom" title="Permalink to this headline">¶</a></h2>
+<p>Syntax: Please insert the path to your folder in the &lt; &gt;</p>
+<img alt="../_images/importGE_new1.png" src="../_images/importGE_new1.png" />
+</div>
+<div class="section" id="import-siemens-dicom">
+<span id="doc-imp-role3"></span><h2>3.4. IMPORT SIEMENS DICOM<a class="headerlink" href="#import-siemens-dicom" title="Permalink to this headline">¶</a></h2>
+<p>If regular Seiemens dicom
+Syntax: Please insert the path to your folder in the &lt; &gt;</p>
+<img alt="../_images/importSei_new1.png" src="../_images/importSei_new1.png" />
+<p>Syntax: Please insert the path to your folder in the &lt; &gt;</p>
+<img alt="../_images/importSei_new2.png" src="../_images/importSei_new2.png" />
+</div>
+<div class="section" id="import-philips-dicom">
+<span id="doc-imp-role4"></span><h2>3.5. IMPORT PHILIPS DICOM<a class="headerlink" href="#import-philips-dicom" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/importPH_new.png" src="../_images/importPH_new.png" />
+</div>
+<div class="section" id="philips-parrec">
+<h2>3.6. PHILIPS PARREC<a class="headerlink" href="#philips-parrec" title="Permalink to this headline">¶</a></h2>
+<p>Please note: the options available with other dicom formats are not available with PARREC.</p>
+<img alt="../_images/importPH_newbr.png" src="../_images/importPH_newbr.png" />
+</div>
+<div class="section" id="import-nifti">
+<span id="doc-imp-role5"></span><h2>3.7. IMPORT NIFTI<a class="headerlink" href="#import-nifti" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/importNIFTI_new.png" src="../_images/importNIFTI_new.png" />
+<p>Please note: when importing 4dnii file, in addition to input file, it is mandatory to provide the phase encoding direction.</p>
+<p>Your images are now imported into TORTOISE format and a <strong>_proc</strong> folder will be created in the same directory (or specified path when running the import command) outside of the dicom folder. This <strong>_proc</strong> folder contains the following files: <strong>.list</strong>, <strong>.nii</strong>, <strong>.bmtxt</strong>.
+The <strong>list</strong> file contains link to the bmtxt and nii file that is in the proc folder. Dicom images are now converted to NIFTI <em>nii</em>  file. Please note: This nii file does not have an associated bvals and bvecs file. Bmtxt file is the file generated from the dot product of the gradient direction and the associated bvalues.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3. <strong>STEP1:IMPORT DATA</strong></a><ul>
+<li><a class="reference internal" href="#import-bruker">3.1. IMPORT BRUKER</a></li>
+<li><a class="reference internal" href="#import-ge-dicom-philips-dicom-siemens-dicom">3.2. IMPORT GE DICOM, PHILIPS DICOM, SIEMENS DICOM</a></li>
+<li><a class="reference internal" href="#import-ge-dicom">3.3. IMPORT GE DICOM</a></li>
+<li><a class="reference internal" href="#import-siemens-dicom">3.4. IMPORT SIEMENS DICOM</a></li>
+<li><a class="reference internal" href="#import-philips-dicom">3.5. IMPORT PHILIPS DICOM</a></li>
+<li><a class="reference internal" href="#philips-parrec">3.6. PHILIPS PARREC</a></li>
+<li><a class="reference internal" href="#import-nifti">3.7. IMPORT NIFTI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="schematic.html"
+                        title="previous chapter">2. <strong>Schematic represenation of the TORTOISE pipeline</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="import_results.html"
+                        title="next chapter">4. <strong>Your Import Outputs- What to expect</strong></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tort_v30/import_step1.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="import_results.html" title="4. Your Import Outputs- What to expect"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="schematic.html" title="2. Schematic represenation of the TORTOISE pipeline"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TORTOISE  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="main_toc.html" ><strong>TORTOISE version 3.0</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Amritha Nayak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
